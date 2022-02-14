@@ -20,3 +20,7 @@ Schema WebShop
 - 3 Mars To - Preliminärt klara
 - 4 Mars Fr - Buffertdag
 - 5-6 Mars - Deadline 1. Rapportskrivning
+
+Vi bygger webshop för pokemons och använder PokeAPI
+Märta fokuserar göra en Collapse eller [Modal] som visar mer info om ett item när man klickar på read more/read comments.
+Joakim fokuserar en Pagination eller Navigation där man bara ser en viss mängd items åt gången och användaren kan bläddra fram och tillbaka.

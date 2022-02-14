@@ -1,0 +1,8 @@
+# Ignore de vscode folder
+.vscode/
+
+# Ignore node_modules folder
+node_modules
+
+# Ignore the out folder folder
+out/
