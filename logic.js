@@ -49,9 +49,11 @@ console.log(getPokemonArray(1));
 
 const fetchPokemons = (pageNr) => {
 
+    pageNr * 10;
+
     const promises = [];
     const pokemons = [];
-    for (let i = pageNr; i <= pageNr + 9; i++) {
+    for (let i = pageNr -9; i <= pageNr; i++) {
       const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
       promises.push(fetch(url).then((response) => response.json()));
     }
