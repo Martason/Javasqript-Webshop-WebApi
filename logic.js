@@ -13,7 +13,7 @@
 //and returns a single Promise that resolves to an array of the results of the input promises. 
 // 
 
-const fetchPokemon = (id) =>{
+/* const fetchPokemon = (id) =>{
 
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
       fetch(url)
@@ -23,7 +23,7 @@ const fetchPokemon = (id) =>{
           return pokemonJsonObj;
 
       });
-}
+} */
 
 /* 1 = 1-10
 2 = 11-20
@@ -32,7 +32,7 @@ const fetchPokemon = (id) =>{
 5 = 41-50
  */
 
-const getPokemonArray = (pageNr) =>{
+/* const getPokemonArray = (pageNr) =>{
 
     pageNr * 10;
 
@@ -43,32 +43,57 @@ const pokemons = [];
     }
 return pokemons;
 
+} */
+
+const fetchPokemon = async id =>{
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const result = await fetch(url);
+    const pokemon = await result.json();
+    return pokemon;
 }
 
-console.log(getPokemonArray(1));
+const getPokemons = async (pageNr) => {
 
-const fetchPokemons = (pageNr) => {
 
-    pageNr * 10;
 
-    const promises = [];
     const pokemons = [];
-    for (let i = pageNr -9; i <= pageNr; i++) {
-      const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-      promises.push(fetch(url).then((response) => response.json()));
+    pageNr = pageNr * 10;
+    for (let i = pageNr -9; i <= pageNr; i++)
+    {
+        const pokemon = await fetchPokemon(i)
+        pokemons.push(pokemon);
     }
 
-    Promise.all(promises)
+    return (pokemons); //Ett jävla promise!! behöver en .then funktion till på nått sätt. 
 
-    .then((results) => {
-       results.map((data) => ({
-        name: data.name,
-        id: data.id,
-        image: data.sprites["front_default"],
-        //type: data.types.map((type) => type.type.name).join(", "),
-      }));
-      
-    });
+};
 
-  };
+getPokemons(10).then(function(result){
+    for(let pokemon of result)
+    {
+        console.log(pokemon)
+    }
+})
 
+
+
+
+  
+ /*  const promises = [];
+  for (let i = pageNr -9; i <= pageNr; i++) {
+    const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    promises.push(fetch(url).then((response) => response.json()));
+  }
+
+  Promise.all(promises)
+
+  .then((results) => {
+     results.map((data) => ({
+      name: data.name,
+      id: data.id,
+      image: data.sprites["front_default"],
+      //type: data.types.map((type) => type.type.name).join(", "),
+    }));
+    
+  });
+ */
