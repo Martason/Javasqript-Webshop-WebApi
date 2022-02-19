@@ -34,26 +34,3 @@ getPokemons = async (pageNr) => {
 
 }
 
-
-
-
-
-  
- /*  const promises = [];
-  for (let i = pageNr -9; i <= pageNr; i++) {
-    const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-    promises.push(fetch(url).then((response) => response.json()));
-  }
-
-  Promise.all(promises)
-
-  .then((results) => {
-     results.map((data) => ({
-      name: data.name,
-      id: data.id,
-      image: data.sprites["front_default"],
-      //type: data.types.map((type) => type.type.name).join(", "),
-    }));
-    
-  });
- */
