@@ -1,8 +1,6 @@
-
 export class logic {
 
-/**
- * 
+/** 
  * @param {*} id 
  * @returns promise of that pokemon
  */
@@ -17,8 +15,7 @@ fetchPokemon = async (id) =>{
     const pokemon = await result.json();
     return pokemon;
 }
-/**
- * 
+/** 
  * @param {*} pageNr 
  * @returns promiseArray of the ten pokemons on that page
  */
