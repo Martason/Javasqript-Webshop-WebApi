@@ -1,7 +1,6 @@
 export class logic {
 
-/
- * 
+/** 
  * @param {*} id 
  * @returns promise of that pokemon
  */
@@ -9,15 +8,14 @@ export class logic {
 //TODO måste få in en cath i detta. BLir kajko när den inte hittar vissa pokemos
 fetchPokemon = async (id) =>{
 
-    const url = new URL("https://pokeapi.co/%22);
-    url.pathname = /api/v2/pokemon/${id};
+    const url = new URL("https://pokeapi.co");
+    url.pathname = `/api/v2/pokemon/${id}`;
 
     const result = await fetch(url);
     const pokemon = await result.json();
     return pokemon;
 }
-/
- * 
+/** 
  * @param {*} pageNr 
  * @returns promiseArray of the ten pokemons on that page
  */

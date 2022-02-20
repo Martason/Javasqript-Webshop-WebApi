@@ -66,8 +66,56 @@ function updatePage(pageNr) {
             <div class="height">Height: ${pokemon.height}</div>
             </div>
             <div class="price">${price} SEK</div>
-            <button id="${pokemon.id}" class="button read-more">Read More</button>
-            <button class="button add-to-shart">Buy</button> 
+            <button class="button add-to-shart">Buy</button>
+            
+            
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="button read-more"
+              data-bs-toggle="modal"
+              data-bs-target="#readMoreModal"
+            >
+              Read more
+            </button>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="readMoreModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">${pokemon.name}</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                  <img class="sprite" src="${pokemon.sprites.front_shiny}">
+                  <br>
+                  <p>${pokemon.base_experience}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-dark">Add to cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             `;
 
       document
@@ -83,5 +131,9 @@ document.querySelectorAll(".read-more").forEach(btn => btn.addEventListener('cli
 //TODO använda pagnation frå bootstrap istället för detta?
 document.getElementById("prevPage").addEventListener('click', prevPage);
 document.getElementById("nextPage").addEventListener('click', nextPage);
+
+
+
+
 
 
