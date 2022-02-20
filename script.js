@@ -14,7 +14,7 @@ document.getElementById("nextPage").addEventListener('click', nextPage);
 
 function prevPage(){
 
-    if(currentPage == 1) return;
+    if(currentPage == 1) return
 
     currentPage -= 1;
     updatePage(currentPage)
@@ -32,7 +32,7 @@ function nextPage(){
  * @description emptys all product-container divs 
  */
 function emptyShop(){
-    document.querySelectorAll(".product-container").forEach(div => {div.innerHTML = ""});
+    document.getElementById("pokemonShop").innerHTML = "";
 
 }
 
@@ -42,19 +42,69 @@ function updatePage(pageNr){
 
     shop.getPokemons(pageNr).then(function(pokemons){
         emptyShop();
+
         for(let pokemon of pokemons){
 
             pokemonDiv = `
-            <div class="product-container">
-            <h3 class="name">${pokemon.name}</h3>
-            <img class="sprite" src="${pokemon.sprites.front_default}">
-            <div class="type">${pokemon.type}</div>
-            <div class="price">999 SEK</div>
-            <button id="${pokemon.id}" class="button read-more">Readmore</button>
-            <button class="button add-to-shart">AddToShart</button> 
+                <div class="product-container">
+                <h3 class="name">${pokemon.name}</h3>
+                <img class="sprite" src="${pokemon.sprites.front_default}">
+                <div class="type">${pokemon.types[0].type.name}</div>
+                <div class="price">999 SEK</div>
+                
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#readMoreModal"
+                >
+                  Read more
+                </button>
+
+                <button class="btn btn-dark">AddToShart</button> 
+
+                <!-- Modal -->
+                <div
+                  class="modal fade"
+                  id="readMoreModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">${pokemon.name}</h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                      <img class="sprite" src="${pokemon.sprites.front_shiny}">
+                      <br>
+                      <p>${pokemon.base_experience}</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button type="button" class="btn btn-dark">Add to cart</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
             `;
 
-            document.getElementById("pokemonShop").insertAdjacentHTML(  "beforeend", pokemonDiv)
+            document.getElementById("pokemonShop").insertAdjacentHTML("beforeend", pokemonDiv)
 
         }
     })

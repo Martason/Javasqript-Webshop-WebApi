@@ -6,8 +6,13 @@ export class logic {
  * @param {*} id 
  * @returns promise of that pokemon
  */
+
+//TODO måste få in en cath i detta. BLir kajko när den inte hittar vissa pokemos
 fetchPokemon = async (id) =>{
-    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+    const url = new URL("https://pokeapi.co");
+    url.pathname = `/api/v2/pokemon/${id}`;
+
     const result = await fetch(url);
     const pokemon = await result.json();
     return pokemon;
@@ -28,9 +33,10 @@ getPokemons = async (pageNr) => {
         pokemons.push(pokemon);
     }
 
+    console.log(pokemons);
+
     return (pokemons); //TODO men hur ska man tänka här med att man returnerar ett promise?
 };
 
 
 }
-
