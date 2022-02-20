@@ -13,6 +13,7 @@
   flex-direction: column;
   width: calc(50% - 5px);
   justify-content: space-around;
+  border: solid black 3px;
   text-align: center;
 }
 
