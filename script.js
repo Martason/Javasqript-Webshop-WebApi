@@ -13,17 +13,33 @@ document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
 
 function prevPage() {
-  if (currentPage == 1) return;
-
-  currentPage -= 1;
-  updatePage(currentPage);
+  if (currentPage == 1) {
+    currentPage = 89;
+    updatePage(currentPage);
+    currentPageNumber();
+  } else {
+    currentPage -= 1;
+    updatePage(currentPage);
+    currentPageNumber();
+  }
 }
 
 function nextPage() {
-  if (currentPage == 130) return; //hur många sidor ska vi ha?
+  if (currentPage == 89) {
+    currentPage = 1;
+    updatePage(currentPage);
+    currentPageNumber();
+  } else {
+    currentPage += 1;
+    updatePage(currentPage);
+    currentPageNumber();
+  }
+}
 
-  currentPage += 1;
-  updatePage(currentPage);
+currentPageNumber();
+
+function currentPageNumber() {
+  document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
 }
 /**
  *
@@ -50,8 +66,8 @@ function updatePage(pageNr) {
             <div class="height">Height: ${pokemon.height}</div>
             </div>
             <div class="price">${price} SEK</div>
-            <button id="${pokemon.id}" class="button read-more">Readmore</button>
-            <button class="button add-to-shart">Add To Cart</button> 
+            <button id="${pokemon.id}" class="button read-more">Read More</button>
+            <button class="button add-to-shart">Buy</button> 
             `;
 
       document

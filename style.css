@@ -16,6 +16,7 @@
 
 .name {
   text-transform: capitalize;
+  font-size: 2rem;
 }
 
 .product-container {
@@ -31,15 +32,18 @@
   width: 60%;
 }
 
+buttonNav {
+}
+
 button {
   border-radius: 4px;
   background-color: #5ca1e1;
   border: none;
   color: #fff;
   text-align: center;
-  font-size: 18px;
+  font-size: 1rem;
   padding: 8px;
-  width: 220px;
+  width: 95%;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -47,8 +51,9 @@ button {
 }
 
 #prevPage,
-#nextPage {
-  width: 100px;
+#nextPage,
+#currentPage {
+  width: 10%;
 }
 
 button {
@@ -88,21 +93,86 @@ button:hover:after {
 */
 
 @media (max-width: 480px) {
-  .pokemonShop {
-    width: 300px;
+  #pokemonShop {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 90%;
+    padding: 5px;
+    margin: auto;
+  }
+
+  .measurement {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .name {
+    text-transform: capitalize;
+    font-size: 1rem;
   }
 
   .product-container {
+    display: flex;
+    flex-direction: column;
     width: calc(50% - 5px);
+    justify-content: space-evenly;
+    text-align: center;
   }
 
-  .shop-img {
-    width: 80%;
-    height: 95px;
-  }
-
-  .button {
+  .sprite {
+    margin: auto;
     width: 60%;
+  }
+
+  button {
+    border-radius: 4px;
+    background-color: #5ca1e1;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 3px;
+    width: 95%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
+  }
+
+  #prevPage,
+  #nextPage {
+    width: 15%;
+  }
+
+  button {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  button:after {
+    content: "»";
+    position: absolute;
+    opacity: 0;
+    top: 14px;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  button:hover {
+    padding-right: 24px;
+    padding-left: 8px;
+    box-shadow: 5px 10px 5px grey;
+    background-color: #0f6dc5;
+  }
+
+  button:hover:after {
+    opacity: 1;
+    right: 10px;
   }
 }
 
