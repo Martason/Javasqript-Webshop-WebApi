@@ -1,32 +1,82 @@
-.pokemonShop {
+#pokemonShop {
   display: flex;
   flex-wrap: wrap;
-  border: solid black 3px;
   gap: 5px;
-  width: 90vh;
+  width: 90%;
   padding: 5px;
   margin: auto;
+}
+
+.measurement {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.name {
+  text-transform: capitalize;
 }
 
 .product-container {
   display: flex;
   flex-direction: column;
-  width: calc(50% - 5px);
-  justify-content: space-around;
-  border: solid black 3px;
+  width: calc(20% - 5px);
+  justify-content: space-evenly;
   text-align: center;
 }
 
-.shop-img {
+.sprite {
   margin: auto;
-  border: solid black 3px;
   width: 60%;
-  height: 95px;
 }
 
-.button {
-  margin: auto;
-  width: 60%;
+button {
+  border-radius: 4px;
+  background-color: #5ca1e1;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  padding: 8px;
+  width: 220px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
+}
+
+#prevPage,
+#nextPage {
+  width: 100px;
+}
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  top: 14px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover {
+  padding-right: 24px;
+  padding-left: 8px;
+  box-shadow: 5px 10px 5px grey;
+  background-color: #0f6dc5;
+}
+
+button:hover:after {
+  opacity: 1;
+  right: 10px;
 }
 
 /*
@@ -65,7 +115,7 @@
     width: calc(33% - 5px);
   }
 
-  .shop-img {
+  .sprite {
     width: 80%;
     height: 120px;
   }
@@ -84,7 +134,7 @@
     width: calc(25% - 5px);
   }
 
-  .shop-img {
+  .sprite {
     width: 80%;
     height: 150px;
   }
@@ -103,7 +153,7 @@
     width: calc(20% - 5px);
   }
 
-  .shop-img {
+  .sprite {
     width: 80%;
     height: 150px;
   }

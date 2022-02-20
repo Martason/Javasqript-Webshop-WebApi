@@ -39,14 +39,19 @@ function updatePage(pageNr) {
   shop.getPokemons(pageNr).then(function (pokemons) {
     emptyShop();
     for (let pokemon of pokemons) {
-      pokemonDiv = `
+      let price = pokemon.height * pokemon.weight;
+      pokemonDiv = `      
             <div class="product-container">
             <h3 class="name">${pokemon.name}</h3>
             <img class="sprite" src="${pokemon.sprites.front_default}">
-            <div class="type">${pokemon.type}</div>
-            <div class="price">999 SEK</div>
+            <div class="type">Type: ${pokemon.types[0].type.name}</div>
+            <div class="measurement">
+            <div class="weight">Weight: ${pokemon.weight} -</div>
+            <div class="height">Height: ${pokemon.height}</div>
+            </div>
+            <div class="price">${price} SEK</div>
             <button id="${pokemon.id}" class="button read-more">Readmore</button>
-            <button class="button add-to-shart">AddToShart</button> 
+            <button class="button add-to-shart">Add To Cart</button> 
             `;
 
       document
