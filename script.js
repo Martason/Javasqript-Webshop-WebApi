@@ -69,7 +69,6 @@ function updatePage(pageNr) {
     emptyShop();
     for (let pokemon of pokemons) {
 
-
       name = pokemon.name;
       price = pokemon.height * pokemon.weight;
       image = pokemon.sprites.front_default;
@@ -77,8 +76,10 @@ function updatePage(pageNr) {
       weight = pokemon.weight;
       height = pokemon.height;
       base_experience = pokemon.base_experience;
+  
       
-      pokemonDiv = `      
+      pokemonDiv =  `
+         
             <div class="product-container">
             <h3 class="name">${name}</h3>
             <img class="sprite" src="${image}">
@@ -154,6 +155,7 @@ updatePage(currentPage);
 
 document.getElementById("prevPage").addEventListener('click', prevPage);
 document.getElementById("nextPage").addEventListener('click', nextPage);
+document.querySelector("btn-outline-success").addEventListener
 
 
 
