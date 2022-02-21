@@ -1,7 +1,6 @@
 export class logic {
 
 
-
 //TODO måste få in en cath i detta. sidan bLir kajko när den inte hittar vissa pokemos
 /* Async functions enable us to write promise based code as if it were synchronous, 
 but without blocking the execution thread. It operates asynchronously via the event-loop. 
@@ -55,30 +54,5 @@ resolved promise with its value.
 
 
 }
-
-/* getPokemons = async (pageNr) => {
-
-    const pokemons = [];
-    pageNr = pageNr * 10;
-    for (let i = pageNr -9; i <= pageNr; i++)
-    {
-        const pokemon = await this.fetchPokemon(i)
-        pokemons.push(pokemon);
-    }
-
-    console.log(pokemons);
-
-    return (pokemons); //TODO men hur ska man tänka här med att man returnerar ett promise?
-}; */
-
-/* fetchPokemon = async (id) =>{
-
-    const url = new URL("https://pokeapi.co");
-    url.pathname = `/api/v2/pokemon/${id}`;
-
-    const result = await fetch(url);
-    const pokemon = await result.json();
-    return pokemon;
-} */
 
 
