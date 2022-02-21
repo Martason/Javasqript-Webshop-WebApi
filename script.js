@@ -52,25 +52,40 @@ function emptyShop() {
   document.getElementById("pokemonShop").innerHTML = "";
 }
 
-//TODO ett alternativ är ju att själva  <!-- Modal --> får ligga kvar i index.html. Så hämtar man och uppdaterar bara specefika variabler med en ny avancerad fetch när någon klickar på en readmore knapp
-//Problemet med att eventlisternern inte funkar för kbappar skapade senare kvarstår dock. 
-
 function updatePage(pageNr) {
+
   let pokemonDiv = "";
+  let name = "";
+  let image = "";
+  let type = "";
+  let weight = "";
+  let height = "";
+  let price = "";
+  let id = "";
+  let base_experience = "";
 
   //TODO jag förstår inte rikigt vad function gör här? behövs den ens?! 
   shop.getPokemons(pageNr).then(function (pokemons) {
     emptyShop();
     for (let pokemon of pokemons) {
-      let price = pokemon.height * pokemon.weight;
+
+
+      name = pokemon.name;
+      price = pokemon.height * pokemon.weight;
+      image = pokemon.sprites.front_default;
+      type = pokemon.types.map(mapArr => mapArr.type.name).join(" / ");
+      weight = pokemon.weight;
+      height = pokemon.height;
+      base_experience = pokemon.base_experience;
+      
       pokemonDiv = `      
             <div class="product-container">
-            <h3 class="name">${pokemon.name}</h3>
-            <img class="sprite" src="${pokemon.sprites.front_default}">
-            <div class="type">Type: ${pokemon.types[0].type.name}</div>
+            <h3 class="name">${name}</h3>
+            <img class="sprite" src="${image}">
+            <div class="type">Type: ${type}</div>
             <div class="measurement">
-            <div class="weight">Weight: ${pokemon.weight} -</div>
-            <div class="height">Height: ${pokemon.height}</div>
+            <div class="weight">Weight: ${weight} -</div>
+            <div class="height">Height: ${height}</div>
             </div>
             <div class="price">${price} SEK</div>
             <button class="button add-to-shart">Buy</button>
@@ -80,9 +95,9 @@ function updatePage(pageNr) {
             <button
               type="button"
               class="button read-more"
-              id ="${pokemon.id}"
+              id ="${id}"
               data-bs-toggle="modal"
-              data-bs-target="#readMoreModal${pokemon.id}"
+              data-bs-target="#readMoreModal${id}"
             >
               Read more
             </button>
@@ -90,7 +105,7 @@ function updatePage(pageNr) {
             <!-- Modal -->
               <div
                 class="modal fade"
-                id="readMoreModal${pokemon.id}"
+                id="readMoreModal${id}"
                 tabindex="-1"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
@@ -98,7 +113,7 @@ function updatePage(pageNr) {
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">${pokemon.name}</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">${name}</h5>
                       <button
                         type="button"
                         class="btn-close"
@@ -107,9 +122,9 @@ function updatePage(pageNr) {
                       ></button>
                     </div>
                     <div class="modal-body">
-                    <img class="sprite" src="${pokemon.sprites.front_shiny}">
+                    <img class="sprite" src="${image}">
                     <br>
-                    <p>${pokemon.base_experience}</p>
+                    <p>${base_experience}</p>
                     </div>
                     <div class="modal-footer">
                       <button
