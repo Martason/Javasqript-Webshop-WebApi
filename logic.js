@@ -29,8 +29,9 @@ fetchPokemon = async (id) =>{
 
     const result = await fetch(url);
     const pokemon = await result.json();
+    
     return pokemon;
-} 
+}
 
 //TODO kan man effektivisera denna funktion genom att göra nån promise.all()? Nu inväntas ju fetchen av VARJE pokemon, kan man inte hämta alla pokemons paralellt och bara vänta på att alla tio är hämtade och SEN returna de här arrayen? 
 /** 
@@ -51,7 +52,6 @@ resolved promise with its value.
     }
     return (pokemons);
 };
-
 
 }
 
