@@ -63,6 +63,8 @@ function updatePage(pageNr) {
   let price = "";
   let id = "";
   let base_experience = "";
+  let abilities ="";
+  let flavorText = "";
 
   //TODO jag förstår inte rikigt vad function gör här? behövs den ens?! 
   shop.getPokemons(pageNr).then(function (pokemons) {
@@ -77,17 +79,15 @@ function updatePage(pageNr) {
       height = pokemon.height;
       base_experience = pokemon.base_experience;
       id = pokemon.id;
-      //abilities = pokemon.abilities;
-      //text = pokemon.flavorText;
+      abilities = pokemon.abilities;
+      flavorText = pokemon.flavorText;
   
-      
       pokemonDiv =  `
          
             <div class="product-container">
             <h3 class="name">${name}</h3>
             <img class="sprite" src="${image}">
             <div class="type">Type: ${type}</div>
-            <div class="type">Abilities:</div>
             <div class="measurement">
             <div class="weight">Weight: ${weight} -</div>
             <div class="height">Height: ${height}</div>
@@ -130,6 +130,8 @@ function updatePage(pageNr) {
                     <img class="sprite" src="${image}">
                     <br>
                     <p>${base_experience}</p>
+                    <p class="type">Abilities:${abilities}</p>
+                    <p class="type">${flavorText}</p>
                     </div>
                     <div class="modal-footer">
                       <button
