@@ -71,11 +71,14 @@ function updatePage(pageNr) {
 
       name = pokemon.name;
       price = pokemon.height * pokemon.weight;
-      image = pokemon.sprites.front_default;
-      type = pokemon.types.map(mapArr => mapArr.type.name).join(" / ");
+      image = pokemon.sprites;
+      type = pokemon.type;
       weight = pokemon.weight;
       height = pokemon.height;
       base_experience = pokemon.base_experience;
+      id = pokemon.id;
+      //abilities = pokemon.abilities;
+      //text = pokemon.flavorText;
   
       
       pokemonDiv =  `
@@ -84,6 +87,7 @@ function updatePage(pageNr) {
             <h3 class="name">${name}</h3>
             <img class="sprite" src="${image}">
             <div class="type">Type: ${type}</div>
+            <div class="type">Abilities:</div>
             <div class="measurement">
             <div class="weight">Weight: ${weight} -</div>
             <div class="height">Height: ${height}</div>
@@ -153,9 +157,9 @@ function updatePage(pageNr) {
 updatePage(currentPage);
 
 
+
 document.getElementById("prevPage").addEventListener('click', prevPage);
 document.getElementById("nextPage").addEventListener('click', nextPage);
-document.querySelector("btn-outline-success").addEventListener
 
 
 
