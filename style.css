@@ -13,10 +13,6 @@
   margin-top: 10px;
 }
 
-.modal-content {
-  border: solid black 3px;
-}
-
 .measurement {
   display: flex;
   flex-wrap: wrap;
@@ -61,6 +57,7 @@ button {
 #nextPage,
 #currentPage {
   width: 10%;
+  background-color: lightcoral;
 }
 
 button {
@@ -71,7 +68,7 @@ button {
 }
 
 button:after {
-  content: "»";
+  /* content: "»"; lägg denna på ett ID i pagination*/
   position: absolute;
   opacity: 0;
   top: 14px;
@@ -97,15 +94,18 @@ button:hover:after {
   justify-content: space-evenly;
 }
 
+.creator {
+  margin-top: 100px;
+}
+
 .creator,
 .fotterLinks {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   font-size: 2rem;
-  text-shadow: 1px 1px black;
+  text-shadow: 2px 2px orange;
   color: darkred;
-  margin-top: 10px;
   text-align: center;
 }
 
