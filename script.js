@@ -108,7 +108,7 @@ function updatePage(pageNr) {
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>
@@ -121,7 +121,7 @@ function updatePage(pageNr) {
                     </div>
                     <div class="modal-body">
                       <img class="sprite" src="${image}">                    
-                      <div>Type: ${type}</div                    
+                      <div>Type: ${type}</div>                    
                       <div>Start XP: ${base_experience}</div>
                       <div class="measurement">
                         <div class="weight">Weight: ${weight} g</div>
@@ -132,14 +132,14 @@ function updatePage(pageNr) {
                       <p class="type">Info: ${flavorText}</p>
                     </div>
                     <div class="modal-footer">
+                    </button>
+                      <button type="button" class="button" id="buyButton">Buy</button>
                       <button
                         type="button"
-                        class="button"
+                        class="button" id="closeBtn"
                         data-bs-dismiss="modal"
                       >
-                        Close
-                      </button>
-                      <button type="button" class="button">Buy</button>
+                        Close                      
                     </div>
                   </div>
                 </div>
