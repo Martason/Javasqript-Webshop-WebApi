@@ -7,6 +7,16 @@
   margin: auto;
 }
 
+.buttonPagination {
+  justify-content: center;
+  display: flex;
+  margin-top: 10px;
+}
+
+.modal-content {
+  border: solid black 3px;
+}
+
 .measurement {
   display: flex;
   flex-wrap: wrap;
@@ -16,7 +26,7 @@
 
 .name {
   text-transform: capitalize;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .product-container {
@@ -30,9 +40,6 @@
 .sprite {
   margin: auto;
   width: 60%;
-}
-
-buttonNav {
 }
 
 button {
@@ -84,6 +91,31 @@ button:hover:after {
   right: 10px;
 }
 
+.footerStyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.creator,
+.fotterLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 2rem;
+  text-shadow: 1px 1px black;
+  color: darkred;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.fotterLink {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: darkblue;
+  font-weight: bolder;
+}
+
 /*
 320px — 480px: Mobile devices
 481px — 768px: iPads, Tablets
@@ -93,142 +125,60 @@ button:hover:after {
 */
 
 @media (max-width: 480px) {
-  #pokemonShop {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    width: 90%;
-    padding: 5px;
-    margin: auto;
-  }
-
-  .measurement {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
+  .product-container {
+    width: calc(50% - 5px);
   }
 
   .name {
-    text-transform: capitalize;
-    font-size: 1rem;
-  }
-
-  .product-container {
-    display: flex;
-    flex-direction: column;
-    width: calc(50% - 5px);
-    justify-content: space-evenly;
-    text-align: center;
-  }
-
-  .sprite {
-    margin: auto;
-    width: 60%;
-  }
-
-  button {
-    border-radius: 4px;
-    background-color: #5ca1e1;
-    border: none;
-    color: #fff;
-    text-align: center;
-    font-size: 0.8rem;
-    padding: 3px;
-    width: 95%;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
-  }
-
-  #prevPage,
-  #nextPage {
-    width: 15%;
-  }
-
-  button {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-
-  button:after {
-    content: "»";
-    position: absolute;
-    opacity: 0;
-    top: 14px;
-    right: -20px;
-    transition: 0.5s;
-  }
-
-  button:hover {
-    padding-right: 24px;
-    padding-left: 8px;
-    box-shadow: 5px 10px 5px grey;
-    background-color: #0f6dc5;
-  }
-
-  button:hover:after {
-    opacity: 1;
-    right: 10px;
+    font-size: 1.5rem;
   }
 }
 
-@media (max-width: 768px) {
-  .pokemonShop {
-    width: 700px;
+@media (min-width: 481px) {
+  .product-container {
+    width: calc(50% - 5px);
   }
+  .name {
+    font-size: 1.5rem;
+  }
+}
 
+@media (min-width: 624px) {
   .product-container {
     width: calc(33% - 5px);
   }
+}
 
-  .sprite {
-    width: 80%;
-    height: 120px;
-  }
-
-  .button {
-    width: 60%;
+@media (min-width: 769px) {
+  .product-container {
+    width: calc(33% - 5px);
   }
 }
 
-@media (max-width: 1024px) {
-  .pokemonShop {
-    width: 900px;
-  }
-
+@media (min-width: 1025px) {
   .product-container {
     width: calc(25% - 5px);
   }
+}
 
-  .sprite {
-    width: 80%;
-    height: 150px;
-  }
-
-  .button {
-    width: 60%;
+@media (min-width: 1201px) {
+  .product-container {
+    width: calc(16% - 5px);
   }
 }
 
-@media (max-width: 1200px) {
-  .pokemonShop {
-    width: 1000px;
+@media (max-width: 786px) {
+  #prevPage,
+  #nextPage,
+  #currentPage {
+    width: 25%;
   }
+}
 
-  .product-container {
-    width: calc(20% - 5px);
-  }
-
-  .sprite {
-    width: 80%;
-    height: 150px;
-  }
-
-  .button {
-    width: 60%;
+@media (max-width: 480px) {
+  #prevPage,
+  #nextPage,
+  #currentPage {
+    width: 75%;
   }
 }

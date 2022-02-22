@@ -38,8 +38,7 @@ function currentPageNumber() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
 }
 
-function HandleReadMoreClick(e)
-{
+function HandleReadMoreClick(e) {
   const clickedPokemonID = e.target.id;
   console.log(clickedPokemonID);
 }
@@ -53,7 +52,6 @@ function emptyShop() {
 }
 
 function updatePage(pageNr) {
-
   let pokemonDiv = "";
   let name = "";
   let image = "";
@@ -63,36 +61,31 @@ function updatePage(pageNr) {
   let price = "";
   let id = "";
   let base_experience = "";
-  let abilities ="";
+  let abilities = "";
   let flavorText = "";
 
-  //TODO jag förstår inte rikigt vad function gör här? behövs den ens?! 
+  //TODO jag förstår inte rikigt vad function gör här? behövs den ens?!
   shop.getPokemons(pageNr).then(function (pokemons) {
     emptyShop();
     for (let pokemon of pokemons) {
-
       name = pokemon.name;
-      price = pokemon.height * pokemon.weight;
+      price = (pokemon.height * pokemon.weight) / 10;
       image = pokemon.sprites;
       type = pokemon.type;
       weight = pokemon.weight;
-      height = pokemon.height;
+      height = pokemon.height * 10;
       base_experience = pokemon.base_experience;
       id = pokemon.id;
       abilities = pokemon.abilities;
       flavorText = pokemon.flavorText;
-  
-      pokemonDiv =  `
+
+      pokemonDiv = `
          
             <div class="product-container">
             <h3 class="name">${name}</h3>
             <img class="sprite" src="${image}">
-            <div class="type">Type: ${type}</div>
-            <div class="measurement">
-            <div class="weight">Weight: ${weight} -</div>
-            <div class="height">Height: ${height}</div>
-            </div>
-            <div class="price">${price} SEK</div>
+            <div class="type">Type: ${type}</div>            
+            <div class="price">Price: ${price} :-</div>
             <button class="button add-to-shart">Buy</button>
             
             
@@ -118,7 +111,7 @@ function updatePage(pageNr) {
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">${name}</h5>
+                      <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>
                       <button
                         type="button"
                         class="btn-close"
@@ -127,21 +120,26 @@ function updatePage(pageNr) {
                       ></button>
                     </div>
                     <div class="modal-body">
-                    <img class="sprite" src="${image}">
-                    <br>
-                    <p>${base_experience}</p>
-                    <p class="type">Abilities:${abilities}</p>
-                    <p class="type">${flavorText}</p>
+                      <img class="sprite" src="${image}">                    
+                      <div>Type: ${type}</div                    
+                      <div>Start XP: ${base_experience}</div>
+                      <div class="measurement">
+                        <div class="weight">Weight: ${weight} g</div>
+                        <div class="height">Height: ${height} cm</div>
+                      </div>
+                      <div class="type">Abilities: ${abilities}</div>
+                      <br>
+                      <p class="type">Info: ${flavorText}</p>
                     </div>
                     <div class="modal-footer">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="button"
                         data-bs-dismiss="modal"
                       >
                         Close
                       </button>
-                      <button type="button" class="btn btn-dark">Add to cart</button>
+                      <button type="button" class="button">Buy</button>
                     </div>
                   </div>
                 </div>
@@ -152,19 +150,13 @@ function updatePage(pageNr) {
         .getElementById("pokemonShop")
         .insertAdjacentHTML("beforeend", pokemonDiv);
     }
-   document.querySelectorAll(".read-more").forEach(btn => btn.addEventListener('click', HandleReadMoreClick)); 
+    document
+      .querySelectorAll(".read-more")
+      .forEach((btn) => btn.addEventListener("click", HandleReadMoreClick));
   });
 }
 
 updatePage(currentPage);
 
-
-
-document.getElementById("prevPage").addEventListener('click', prevPage);
-document.getElementById("nextPage").addEventListener('click', nextPage);
-
-
-
-
-
-
+document.getElementById("prevPage").addEventListener("click", prevPage);
+document.getElementById("nextPage").addEventListener("click", nextPage);
