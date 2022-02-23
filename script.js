@@ -69,10 +69,10 @@ function updatePage(pageNr) {
     emptyShop();
     for (let pokemon of pokemons) {
       name = pokemon.name;
-      price = (pokemon.height * pokemon.weight) / 10;
+      price = pokemon.height * pokemon.weight;
       image = pokemon.sprites;
       type = pokemon.type;
-      weight = pokemon.weight;
+      weight = pokemon.weight / 10;
       height = pokemon.height * 10;
       base_experience = pokemon.base_experience;
       id = pokemon.id;
@@ -108,10 +108,10 @@ function updatePage(pageNr) {
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">                
+                  <div class="modal-content">                  
+                    <div class="modal-header">                    
+                      <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>                      
                       <button
                         type="button"
                         class="btn-close"
@@ -119,18 +119,18 @@ function updatePage(pageNr) {
                         aria-label="Close"
                       ></button>
                     </div>
-                    <div class="modal-body">
-                      <img class="sprite" src="${image}">                    
+                    <div class="modal-body">                                        
+                      <img class="spriteModal" src="${image}">                    
                       <div>Type: ${type}</div>                    
                       <div>Start XP: ${base_experience}</div>
                       <div class="measurement">
-                        <div class="weight">Weight: ${weight} g</div>
+                        <div class="weight">Weight: ${weight} kg</div>
                         <div class="height">Height: ${height} cm</div>
-                      </div>
+                      </div>                      
                       <div class="type">Abilities: ${abilities}</div>
                       <br>
                       <p class="type">Info: ${flavorText}</p>
-                    </div>
+                    </div>                    
                     <div class="modal-footer">
                     </button>
                       <button type="button" class="button" id="buyButton">Buy</button>
