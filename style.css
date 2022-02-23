@@ -8,8 +8,8 @@
 }
 
 .buttonPagination {
-  justify-content: center;
   display: flex;
+  justify-content: center;
   margin-top: 10px;
 }
 
@@ -18,6 +18,27 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
+}
+
+.paginationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#prevPage,
+#nextPage,
+#currentPage {
+  background-color: lightcoral;
+}
+
+#inputSearch {
+  width: 250%;
+}
+
+#numberSearch {
+  text-align: center;
 }
 
 .name {
@@ -34,17 +55,21 @@
 }
 
 .spriteModal {
-  width: 50%;
+  background-image: url("/img/background.png");
+  background-repeat: no-repeat;
+  border-radius: 60%;
+  border: solid black 1px;
+  width: 95%;
 }
 
 .sprite:hover {
   margin: auto;
-  width: 60%;
+  width: 100%;
   border-radius: 60%;
   box-shadow: 1px 1px 10px purple;
 }
 
-button {
+.button {
   border-radius: 4px;
   background-color: #5ca1e1;
   border: none;
@@ -59,21 +84,14 @@ button {
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
 }
 
-#prevPage,
-#nextPage,
-#currentPage {
-  width: 10%;
-  background-color: lightcoral;
-}
-
-button {
+.button {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-button:after {
+.button:after {
   /* content: "»"; lägg denna på ett ID i pagination*/
   position: absolute;
   opacity: 0;
@@ -82,7 +100,7 @@ button:after {
   transition: 0.5s;
 }
 
-button:hover {
+.button:hover {
   /* padding-right: 24px; */
   /* padding: 6px; */
   font-weight: bolder;
@@ -91,7 +109,7 @@ button:hover {
   color: black;
 }
 
-button:hover:after {
+.button:hover:after {
   opacity: 1;
   right: 10px;
 }
@@ -146,6 +164,17 @@ button:hover:after {
   .name {
     font-size: 1.5rem;
   }
+
+  #prevPage,
+  #nextPage,
+  #currentPage {
+    width: 90px;
+  }
+
+  #numberSearch {
+    width: 60%;
+    margin-top: 15px;
+  }
 }
 
 @media (min-width: 481px) {
@@ -155,11 +184,31 @@ button:hover:after {
   .name {
     font-size: 1.5rem;
   }
+
+  #prevPage,
+  #nextPage,
+  #currentPage {
+    width: 120px;
+  }
+
+  #numberSearch {
+    width: 40%;
+  }
 }
 
 @media (min-width: 624px) {
   .product-container {
     width: calc(33% - 5px);
+  }
+
+  #prevPage,
+  #nextPage,
+  #currentPage {
+    width: 100px;
+  }
+
+  #numberSearch {
+    width: 35%;
   }
 }
 
@@ -167,11 +216,31 @@ button:hover:after {
   .product-container {
     width: calc(33% - 5px);
   }
+
+  #prevPage,
+  #nextPage,
+  #currentPage {
+    width: 110px;
+  }
+
+  #numberSearch {
+    width: 30%;
+  }
 }
 
 @media (min-width: 1025px) {
   .product-container {
     width: calc(25% - 5px);
+  }
+
+  #prevPage,
+  #nextPage,
+  #currentPage {
+    width: 100px;
+  }
+
+  #numberSearch {
+    width: 25%;
   }
 }
 
@@ -179,20 +248,14 @@ button:hover:after {
   .product-container {
     width: calc(16% - 5px);
   }
-}
 
-@media (max-width: 786px) {
   #prevPage,
   #nextPage,
   #currentPage {
-    width: 25%;
+    width: 100px;
   }
-}
 
-@media (max-width: 480px) {
-  #prevPage,
-  #nextPage,
-  #currentPage {
-    width: 75%;
+  #numberSearch {
+    width: 15%;
   }
 }

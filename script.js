@@ -7,10 +7,11 @@ let currentPage = 1; //TODO localstorage här kanske om man inte alltid vill att
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
+document.getElementById("searchButton").addEventListener("click", searchPage);
 
 function prevPage() {
-  if (currentPage == 1) {
-    currentPage = 89;
+  if (currentPage <= 1) {
+    currentPage = 74;
     updatePage(currentPage);
     currentPageNumber();
   } else {
@@ -21,7 +22,7 @@ function prevPage() {
 }
 
 function nextPage() {
-  if (currentPage == 89) {
+  if (currentPage >= 74) {
     currentPage = 1;
     updatePage(currentPage);
     currentPageNumber();
@@ -32,15 +33,25 @@ function nextPage() {
   }
 }
 
+window.addEventListener("keyup", function (event) {
+  if (event.keyCode === 13) {
+    let pageNr = document.getElementById("numberSearch").value;
+    updatePage(pageNr);
+    currentPage = pageNr;
+  }
+});
+
+function searchPage() {
+  let pageNr = document.getElementById("inputSearch").value;
+  updatePage(pageNr);
+  currentPage = pageNr;
+  currentPageNumber();
+}
+
 currentPageNumber();
 
 function currentPageNumber() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
-}
-
-function HandleReadMoreClick(e) {
-  const clickedPokemonID = e.target.id;
-  console.log(clickedPokemonID);
 }
 
 /**
@@ -119,6 +130,7 @@ function updatePage(pageNr) {
                       <div class="type">Abilities: ${abilities}</div>
                       <br>
                       <p class="type">Info: ${flavorText}</p>
+                      <div>Page: ${pageNr}</di
                     </div>                    
                     <div class="modal-footer">
                     </button>
@@ -139,13 +151,7 @@ function updatePage(pageNr) {
         .getElementById("pokemonShop")
         .insertAdjacentHTML("beforeend", pokemonDiv);
     }
-    document
-      .querySelectorAll(".read-more")
-      .forEach((btn) => btn.addEventListener("click", HandleReadMoreClick));
   });
 }
 
 updatePage(currentPage);
-
-document.getElementById("prevPage").addEventListener("click", prevPage);
-document.getElementById("nextPage").addEventListener("click", nextPage);
