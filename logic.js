@@ -5,6 +5,11 @@ export class logic {
    * @returns pokemon object
    */
 
+  getRandomInt = (max) => {
+    return Math.floor(Math.random() * max);
+  };
+  /*  flavorTexts[getRandomInt(this.flavorText.length)] */
+
   fetchPokemon = async (id) => {
     const url = new URL("https://pokeapi.co");
     url.pathname = `/api/v2/pokemon/${id}`;
@@ -13,6 +18,14 @@ export class logic {
     const species = await fetch(pokemon.species.url).then((response) =>
       response.json()
     );
+
+    let flavorTexts = [];
+
+    species.flavor_text_entries.forEach((entry) => {
+      if (entry.language.name == "en") {
+        flavorTexts.push(entry.flavor_text);
+      } else flavorTexts.push("No information in english avalable");
+    });
 
     const pokemonObj = {
       id: pokemon.id,
@@ -25,7 +38,7 @@ export class logic {
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-      flavorText: species.flavor_text_entries[0].flavor_text,
+      flavorText: flavorTexts[0],
     };
 
     return pokemonObj;
@@ -37,6 +50,7 @@ export class logic {
    * @returns array of the 12 pokemonObj on that page.
    */
   //TODO fixa en try catch för fetch pokemon?
+
   getPokemons = async (pageNr) => {
     const promises = [];
     pageNr = pageNr * 12;
