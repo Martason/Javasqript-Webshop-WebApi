@@ -54,22 +54,21 @@ function emptyShop() {
 function updatePage(pageNr) {
   let pokemonDiv = "";
 
-   shop.getPokemons(pageNr).then(pokemons => { 
+  shop.getPokemons(pageNr).then((pokemons) => {
     emptyShop();
     for (let pokemon of pokemons) {
-
       let name = pokemon.name;
       let price = pokemon.height * pokemon.weight;
       let image = pokemon.sprites;
       let type = pokemon.type;
-      let weight = pokemon.weight;
-      let height = pokemon.height;
+      let weight = pokemon.weight / 10;
+      let height = pokemon.height * 10;
       let base_experience = pokemon.base_experience;
       let id = pokemon.id;
       let abilities = pokemon.abilities;
       let flavorText = pokemon.flavorText;
-  
-      pokemonDiv =  `
+
+      pokemonDiv = `
          
             <div class="product-container">
             <h3 class="name">${name}</h3>
@@ -98,10 +97,10 @@ function updatePage(pageNr) {
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">                
+                  <div class="modal-content">                  
+                    <div class="modal-header">                    
+                      <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>                      
                       <button
                         type="button"
                         class="btn-close"
@@ -109,18 +108,18 @@ function updatePage(pageNr) {
                         aria-label="Close"
                       ></button>
                     </div>
-                    <div class="modal-body">
-                      <img class="sprite" src="${image}">                    
+                    <div class="modal-body">                                        
+                      <img class="spriteModal" src="${image}">                    
                       <div>Type: ${type}</div>                    
                       <div>Start XP: ${base_experience}</div>
                       <div class="measurement">
-                        <div class="weight">Weight: ${weight} g</div>
+                        <div class="weight">Weight: ${weight} kg</div>
                         <div class="height">Height: ${height} cm</div>
-                      </div>
+                      </div>                      
                       <div class="type">Abilities: ${abilities}</div>
                       <br>
                       <p class="type">Info: ${flavorText}</p>
-                    </div>
+                    </div>                    
                     <div class="modal-footer">
                     </button>
                       <button type="button" class="button" id="buyButton">Buy</button>

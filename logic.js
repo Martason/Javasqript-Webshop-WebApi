@@ -5,11 +5,6 @@ export class logic {
    * @returns pokemon object
    */
 
-  getRandomInt = (max) => {
-    return Math.floor(Math.random() * max);
-  };
-  /*  flavorTexts[getRandomInt(this.flavorText.length)] */
-
   fetchPokemon = async (id) => {
     const url = new URL("https://pokeapi.co");
     url.pathname = `/api/v2/pokemon/${id}`;
@@ -24,7 +19,7 @@ export class logic {
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
         flavorTexts.push(entry.flavor_text);
-      } else flavorTexts.push("No information in english avalable");
+      } 
     });
 
     const pokemonObj = {
@@ -32,13 +27,15 @@ export class logic {
       name: pokemon.name,
       height: pokemon.height,
       weight: pokemon.weight,
-      sprites: pokemon.sprites.front_default,
+
+      sprites: pokemon.sprites.other["official-artwork"].front_default,
+
       type: pokemon.types.map((mapArr) => mapArr.type.name).join(" / "),
       abilities: pokemon.abilities
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-      flavorText: flavorTexts[0],
+      flavorText: flavorTexts[0]
     };
 
     return pokemonObj;

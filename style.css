@@ -33,9 +33,15 @@
   text-align: center;
 }
 
-.sprite {
+.spriteModal {
+  width: 50%;
+}
+
+.sprite:hover {
   margin: auto;
   width: 60%;
+  border-radius: 60%;
+  box-shadow: 1px 1px 10px purple;
 }
 
 button {
@@ -77,10 +83,12 @@ button:after {
 }
 
 button:hover {
-  padding-right: 24px;
-  padding-left: 8px;
-  box-shadow: 5px 10px 5px grey;
-  background-color: #0f6dc5;
+  /* padding-right: 24px; */
+  /* padding: 6px; */
+  font-weight: bolder;
+  box-shadow: 1px 5px 20px black;
+  background-color: lightcoral;
+  color: black;
 }
 
 button:hover:after {
@@ -114,6 +122,12 @@ button:hover:after {
   font-size: 1.5rem;
   color: darkblue;
   font-weight: bolder;
+}
+
+.modal-content {
+  border-radius: 10px;
+  border: solid black 4px;
+  box-shadow: 1px 1px 25px skyblue;
 }
 
 /*
