@@ -38,6 +38,7 @@ window.addEventListener("keyup", function (event) {
     let pageNr = document.getElementById("numberSearch").value;
     updatePage(pageNr);
     currentPage = pageNr;
+    currentPageNumber();
   }
 });
 
