@@ -14,18 +14,28 @@ export class logic {
       response.json()
     );
 
+    let flavorTexts = [];
+
+    species.flavor_text_entries.forEach((entry) => {
+      if (entry.language.name == "en") {
+        flavorTexts.push(entry.flavor_text);
+      } 
+    });
+
     const pokemonObj = {
       id: pokemon.id,
       name: pokemon.name,
       height: pokemon.height,
       weight: pokemon.weight,
+
       sprites: pokemon.sprites.other["official-artwork"].front_default,
+
       type: pokemon.types.map((mapArr) => mapArr.type.name).join(" / "),
       abilities: pokemon.abilities
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-      flavorText: species.flavor_text_entries[0].flavor_text,
+      flavorText: flavorTexts[0]
     };
 
     return pokemonObj;
@@ -37,6 +47,7 @@ export class logic {
    * @returns array of the 12 pokemonObj on that page.
    */
   //TODO fixa en try catch för fetch pokemon?
+
   getPokemons = async (pageNr) => {
     const promises = [];
     pageNr = pageNr * 12;
