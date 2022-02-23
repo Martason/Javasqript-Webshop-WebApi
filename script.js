@@ -3,7 +3,7 @@ import { logic as Shop } from "./logic.js";
 let shop;
 shop = new Shop();
 
-let currentPage = 1; //TODOCommer behöva nån localstorage här kanske om man inte alltid vill att de ska börja på 1 ved refresh?
+let currentPage = 1; //TODO localstorage här kanske om man inte alltid vill att de ska börja på 1 ved refresh?
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
@@ -53,19 +53,8 @@ function emptyShop() {
 
 function updatePage(pageNr) {
   let pokemonDiv = "";
-  let name = "";
-  let image = "";
-  let type = "";
-  let weight = "";
-  let height = "";
-  let price = "";
-  let id = "";
-  let base_experience = "";
-  let abilities = "";
-  let flavorText = "";
 
-  //TODO jag förstår inte rikigt vad function gör här? behövs den ens?!
-  shop.getPokemons(pageNr).then(function (pokemons) {
+  shop.getPokemons(pageNr).then((pokemons) => {
     emptyShop();
     for (let pokemon of pokemons) {
       name = pokemon.name;
