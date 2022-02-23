@@ -57,16 +57,16 @@ function updatePage(pageNr) {
   shop.getPokemons(pageNr).then((pokemons) => {
     emptyShop();
     for (let pokemon of pokemons) {
-      name = pokemon.name;
-      price = pokemon.height * pokemon.weight;
-      image = pokemon.sprites;
-      type = pokemon.type;
-      weight = pokemon.weight / 10;
-      height = pokemon.height * 10;
-      base_experience = pokemon.base_experience;
-      id = pokemon.id;
-      abilities = pokemon.abilities;
-      flavorText = pokemon.flavorText;
+      let name = pokemon.name;
+      let price = pokemon.height * pokemon.weight;
+      let image = pokemon.sprites;
+      let type = pokemon.type;
+      let weight = pokemon.weight / 10;
+      let height = pokemon.height * 10;
+      let base_experience = pokemon.base_experience;
+      let id = pokemon.id;
+      let abilities = pokemon.abilities;
+      let flavorText = pokemon.flavorText;
 
       pokemonDiv = `
          
