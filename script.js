@@ -3,14 +3,15 @@ import { logic as Shop } from "./logic.js";
 let shop;
 shop = new Shop();
 
-let currentPage = 74; //TODO localstorage här kanske om man inte alltid vill att de ska börja på 1 ved refresh?
+let currentPage = 1; //TODO localstorage här kanske om man inte alltid vill att de ska börja på 1 ved refresh?
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
+document.getElementById("searchButton").addEventListener("click", searchPage);
 
 function prevPage() {
-  if (currentPage == 1) {
-    currentPage = 90;
+  if (currentPage <= 1) {
+    currentPage = 75;
     updatePage(currentPage);
     currentPageNumber();
   } else {
@@ -32,15 +33,26 @@ function nextPage() {
   }
 }
 
+window.addEventListener("keyup", function (event) {
+  if (event.keyCode === 13) {
+    let pageNr = document.getElementById("numberSearch").value;
+    updatePage(pageNr);
+    currentPage = pageNr;
+    currentPageNumber();
+  }
+});
+
+function searchPage() {
+  let pageNr = document.getElementById("inputSearch").value;
+  updatePage(pageNr);
+  currentPage = pageNr;
+  currentPageNumber();
+}
+
 currentPageNumber();
 
 function currentPageNumber() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
-}
-
-function HandleReadMoreClick(e) {
-  const clickedPokemonID = e.target.id;
-  console.log(clickedPokemonID);
 }
 
 /**
@@ -119,6 +131,7 @@ function updatePage(pageNr) {
                       <div class="type">Abilities: ${abilities}</div>
                       <br>
                       <p class="type">Info: ${flavorText}</p>
+                      <div>Page: ${pageNr}</di
                     </div>                    
                     <div class="modal-footer">
                     </button>
@@ -139,15 +152,7 @@ function updatePage(pageNr) {
         .getElementById("pokemonShop")
         .insertAdjacentHTML("beforeend", pokemonDiv);
     }
-    document
-      .querySelectorAll(".read-more")
-      .forEach((btn) => btn.addEventListener("click", HandleReadMoreClick));
   });
 }
 
-//shop.fetchPokemon(899);
-
 updatePage(currentPage);
-
-document.getElementById("prevPage").addEventListener("click", prevPage);
-document.getElementById("nextPage").addEventListener("click", nextPage);

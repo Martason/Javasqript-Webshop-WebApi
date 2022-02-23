@@ -34,8 +34,9 @@
               </li>
             </ul>
             <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search our shop" aria-label="Search" />
-              <button class="btn btn-outline-success" type="submit">
+              <input id="inputSearch" class="form-control me-2" type="search" placeholder="Search pokemon"
+                aria-label="Search" />
+              <button id="searchButton" class="btn btn-outline-success" type="submit">
                 Go!
               </button>
             </form>
@@ -43,12 +44,18 @@
         </div>
       </nav>
     </header>
-    <div class="buttonPagination">
-      <button class="button" id="prevPage">Prev</button>
-      <button class="button" id="currentPage"></button>
-      <button class="button" id="nextPage">Next</button>
+    <div class="paginationContainer">
+      <div class="buttonPagination">
+        <button class="button" id="prevPage">Previous</button>
+        <button class="button" id="currentPage"></button>
+        <button class="button" id="nextPage">Next</button>
+      </div>
+      <input id="numberSearch" class="form-control me-2" type="search" placeholder="Search page 1-74"
+        aria-label="Search" />
     </div>
     <section class="container" id="pokemonShop"></section>
+
+
   </main>
   <footer class="container">
     <div class="footerStyle">

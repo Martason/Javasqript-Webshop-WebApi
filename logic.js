@@ -20,13 +20,10 @@ export class logic {
     let species;
 
     let response = await fetch(url);
-    pokemon = await response.json(); //HÄR felet måste hanteras!
+    pokemon = await response.json();
     response = await fetch(pokemon.species.url);
     species = await response.json();
 
-    //kväver felet i fetch. felet kommer inte ut. måste awaita fetch och sen response.
-    // vill man att det ska bubbla upp så måste man använa await/asynch
-    //.then funkar rikigt på samma sätt. Kan inte catch hantera saker som skett bakåt i tiden. kan ha en eventlistern som presenterar delet, men kan inte gör anått åt det. nackdel med fetch?
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
         this.flavorTexts.push(entry.flavor_text);
@@ -56,7 +53,6 @@ export class logic {
    */
 
   getPokemons = async (pageNr) => {
-    5;
     const promises = [];
     pageNr = pageNr * 12;
     for (let i = pageNr - 1; i <= pageNr; i++) {
