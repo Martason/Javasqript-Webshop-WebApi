@@ -5,21 +5,29 @@ export class logic {
    * @returns pokemon object
    */
 
+  flavorTexts = [];
+
   fetchPokemon = async (id) => {
+    /* const pokemon = await fetch(url).then((response) => response.json());
+    const species = await fetch(pokemon.species.url).then((response) =>
+      response.json()
+    ); */
+
     const url = new URL("https://pokeapi.co");
     url.pathname = `/api/v2/pokemon/${id}`;
 
-    const pokemon = await fetch(url).then((response) => response.json());
-    const species = await fetch(pokemon.species.url).then((response) =>
-      response.json()
-    );
+    let pokemon;
+    let species;
 
-    let flavorTexts = [];
+    let response = await fetch(url);
+    pokemon = await response.json();
+    response = await fetch(pokemon.species.url);
+    species = await response.json();
 
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
-        flavorTexts.push(entry.flavor_text);
-      } 
+        this.flavorTexts.push(entry.flavor_text);
+      }
     });
 
     const pokemonObj = {
@@ -27,38 +35,36 @@ export class logic {
       name: pokemon.name,
       height: pokemon.height,
       weight: pokemon.weight,
-
       sprites: pokemon.sprites.other["official-artwork"].front_default,
-
       type: pokemon.types.map((mapArr) => mapArr.type.name).join(" / "),
       abilities: pokemon.abilities
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-      flavorText: flavorTexts[0]
+      flavorText: this.flavorTexts[0],
     };
-
     return pokemonObj;
   };
 
   /**
    * @description Async function
    * @param {*} pageNr
-   * @returns array of the 12 pokemonObj on that page.
+   * @returns array of 12 pokemonObj on that page.
    */
-  //TODO fixa en try catch för fetch pokemon?
 
   getPokemons = async (pageNr) => {
     const promises = [];
     pageNr = pageNr * 12;
-    for (let i = pageNr - 11; i <= pageNr; i++) {
+    for (let i = pageNr - 1; i <= pageNr; i++) {
       const pokemon = this.fetchPokemon(i);
       promises.push(pokemon);
 
-      const preloadPokemonsInBrowserChacheMoory = this.fetchPokemon(i + 12); //ska inte vara await!
+      const preloadPokemonsInBrowserChacheMemory = this.fetchPokemon(i + 12);
     }
 
-    const pokemons = await Promise.all(promises);
-    return pokemons;
+    const resluts = await Promise.allSettled(promises);
+    return resluts
+      .filter((promises) => promises.status === "fulfilled")
+      .map((promises) => promises.value);
   };
 }
