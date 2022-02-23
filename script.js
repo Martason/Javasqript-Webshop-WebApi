@@ -3,14 +3,14 @@ import { logic as Shop } from "./logic.js";
 let shop;
 shop = new Shop();
 
-let currentPage = 1; //TODO localstorage här kanske om man inte alltid vill att de ska börja på 1 ved refresh?
+let currentPage = 74; //TODO localstorage här kanske om man inte alltid vill att de ska börja på 1 ved refresh?
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
 
 function prevPage() {
   if (currentPage == 1) {
-    currentPage = 89;
+    currentPage = 90;
     updatePage(currentPage);
     currentPageNumber();
   } else {
@@ -21,7 +21,7 @@ function prevPage() {
 }
 
 function nextPage() {
-  if (currentPage == 89) {
+  if (currentPage == 75) {
     currentPage = 1;
     updatePage(currentPage);
     currentPageNumber();
@@ -144,6 +144,8 @@ function updatePage(pageNr) {
       .forEach((btn) => btn.addEventListener("click", HandleReadMoreClick));
   });
 }
+
+//shop.fetchPokemon(899);
 
 updatePage(currentPage);
 
