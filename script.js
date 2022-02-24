@@ -3,7 +3,7 @@ import { logic as Shop } from "./logic.js";
 let shop;
 shop = new Shop();
 
-let currentPage = 1; //TODO localstorage här kanske om man inte alltid vill att de ska börja på 1 ved refresh?
+let currentPage = 1;
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
