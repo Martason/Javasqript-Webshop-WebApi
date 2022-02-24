@@ -46,16 +46,19 @@ export class logic {
     const promises = [];
     pageNr = pageNr * 12;
     for (let i = pageNr - 11; i <= pageNr; i++) {
+      i = i < 899 ? i : i + 9102;
       const pokemon = this.fetchPokemon(i);
+      i = i > 899 ? i - 9102 : i;
       promises.push(pokemon);
 
-      const preloadPokemonsInBrowserChacheMemory = this.fetchPokemon(
+      /*    const preloadPokemonsInBrowserChacheMemory = this.fetchPokemon(
         i + 12
-      ).catch(console.log);
+      ).catch((_) =>
+        console.log("fetchError while atemting to preload nextpage")
+      ); */
     }
 
     const resluts = await Promise.allSettled(promises);
-    debugger;
     return resluts
       .filter((promises) => promises.status === "fulfilled")
       .map((promises) => promises.value);

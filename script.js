@@ -11,7 +11,7 @@ document.getElementById("searchButton").addEventListener("click", searchPage);
 
 function prevPage() {
   if (currentPage <= 1) {
-    currentPage = 75;
+    currentPage = 94;
     updatePage(currentPage);
     currentPageNumber();
   } else {
@@ -22,7 +22,7 @@ function prevPage() {
 }
 
 function nextPage() {
-  if (currentPage == 75) {
+  if (currentPage == 94) {
     currentPage = 1;
     updatePage(currentPage);
     currentPageNumber();
