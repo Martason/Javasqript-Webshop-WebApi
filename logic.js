@@ -1,28 +1,19 @@
 export class logic {
+  flavorTexts = [];
+
   /**
    * @description Async function
    * @param {*} id
    * @returns pokemon object
    */
-
-  flavorTexts = [];
-
   fetchPokemon = async (id) => {
-    /* const pokemon = await fetch(url).then((response) => response.json());
-    const species = await fetch(pokemon.species.url).then((response) =>
-      response.json()
-    ); */
-
     const url = new URL("https://pokeapi.co");
     url.pathname = `/api/v2/pokemon/${id}`;
 
-    let pokemon;
-    let species;
-
-    let response = await fetch(url);
-    pokemon = await response.json();
-    response = await fetch(pokemon.species.url);
-    species = await response.json();
+    const pokemon = await fetch(url).then((response) => response.json());
+    const species = await fetch(pokemon.species.url).then((response) =>
+      response.json()
+    );
 
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
@@ -51,18 +42,20 @@ export class logic {
    * @param {*} pageNr
    * @returns array of 12 pokemonObj on that page.
    */
-
   getPokemons = async (pageNr) => {
     const promises = [];
     pageNr = pageNr * 12;
-    for (let i = pageNr - 1; i <= pageNr; i++) {
+    for (let i = pageNr - 11; i <= pageNr; i++) {
       const pokemon = this.fetchPokemon(i);
       promises.push(pokemon);
 
-      const preloadPokemonsInBrowserChacheMemory = this.fetchPokemon(i + 12);
+      const preloadPokemonsInBrowserChacheMemory = this.fetchPokemon(
+        i + 12
+      ).catch(console.log);
     }
 
     const resluts = await Promise.allSettled(promises);
+    debugger;
     return resluts
       .filter((promises) => promises.status === "fulfilled")
       .map((promises) => promises.value);
