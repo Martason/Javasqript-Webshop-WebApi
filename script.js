@@ -12,7 +12,7 @@ document.getElementById("nextPage").addEventListener("click", nextPage);
 
 function prevPage() {
   if (currentPage <= 1) {
-    currentPage = 74;
+    currentPage = 75;
     updatePage(currentPage);
     uppdatePageNummer();
   } else {
@@ -23,7 +23,7 @@ function prevPage() {
 }
 
 function nextPage() {
-  if (currentPage >= 74) {
+  if (currentPage == 75) {
     currentPage = 1;
     updatePage(currentPage);
     uppdatePageNummer();
