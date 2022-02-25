@@ -1,23 +1,24 @@
-import { logic as Shop } from "./logic.js";
+import { logic, logic as Shop } from "./logic.js";
 
 let shop;
 shop = new Shop();
 
-let currentPage = 1;
+//pagination -
+
+let currentPage = shop.loadPageNr();
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
-document.getElementById("searchButton").addEventListener("click", searchPage);
 
 function prevPage() {
   if (currentPage <= 1) {
     currentPage = 75;
     updatePage(currentPage);
-    currentPageNumber();
+    uppdatePageNummer();
   } else {
-    currentPage -= 1;
+    currentPage--;
     updatePage(currentPage);
-    currentPageNumber();
+    uppdatePageNummer();
   }
 }
 
@@ -25,34 +26,31 @@ function nextPage() {
   if (currentPage == 75) {
     currentPage = 1;
     updatePage(currentPage);
-    currentPageNumber();
+    uppdatePageNummer();
   } else {
-    currentPage += 1;
+    currentPage++;
     updatePage(currentPage);
-    currentPageNumber();
+    uppdatePageNummer();
   }
 }
 
-window.addEventListener("keyup", function (event) {
+document.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
     let pageNr = document.getElementById("numberSearch").value;
     updatePage(pageNr);
     currentPage = pageNr;
-    currentPageNumber();
+    uppdatePageNummer();
+    document.getElementById("numberSearch").value = "";
   }
 });
 
-function searchPage() {
-  let pageNr = document.getElementById("inputSearch").value;
-  updatePage(pageNr);
-  currentPage = pageNr;
-  currentPageNumber();
-}
+uppdatePageNummer();
 
-currentPageNumber();
-
-function currentPageNumber() {
+function uppdatePageNummer() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
+  shop.currentPage = currentPage;
+  shop.savePageNr();
+  console.log(currentPage);
 }
 
 /**
@@ -82,70 +80,53 @@ function updatePage(pageNr) {
 
       pokemonDiv = `
          
-            <div class="product-container">
-            <h3 class="name">${name}</h3>
-            <img class="sprite" src="${image}">
-            <div class="type">Type: ${type}</div>            
-            <div class="price">Price: ${price} :-</div>
-            <button class="button add-to-shart">Buy</button>
-            
-            
-            <!-- Button trigger modal -->
-            <button
-              type="button"
-              class="button read-more"
-              id ="${id}"
-              data-bs-toggle="modal"
-              data-bs-target="#readMoreModal${id}"
-            >
-              Read more
-            </button>
-
-            <!-- Modal -->
-              <div
-                class="modal fade"
-                id="readMoreModal${id}"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">                
-                  <div class="modal-content">                  
-                    <div class="modal-header">                    
-                      <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>                      
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="modal-body">                                        
-                      <img class="spriteModal" src="${image}">                    
-                      <div>Type: ${type}</div>                    
-                      <div>Start XP: ${base_experience}</div>
-                      <div class="measurement">
-                        <div class="weight">Weight: ${weight} kg</div>
-                        <div class="height">Height: ${height} cm</div>
-                      </div>                      
-                      <div class="type">Abilities: ${abilities}</div>
-                      <br>
-                      <p class="type">Info: ${flavorText}</p>
-                      <div>Page: ${pageNr}</di
-                    </div>                    
-                    <div class="modal-footer">
-                    </button>
-                      <button type="button" class="button" id="buyButton">Buy</button>
-                      <button
-                        type="button"
-                        class="button" id="closeBtn"
-                        data-bs-dismiss="modal"
-                      >
-                        Close                      
-                    </div>
-                  </div>
-                </div>
+      <div class="product-container">
+      <h3 class="name">${name}</h3>
+      <img class="sprite" src="${image}">
+      <div class="type">Type: ${type}</div>
+      <div class="price">Price: ${price} :-</div>
+      <button class="button add-to-shart">Buy</button>
+    
+    
+      <!-- Button trigger modal -->
+      <button type="button" class="button read-more" id="${id}" data-bs-toggle="modal" data-bs-target="#readMoreModal${id}">
+        Read more
+      </button>
+    
+      <!-- Modal -->
+      <div class="modal fade" id="readMoreModal${id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title name" id="exampleModalLabel">${name}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <img class="spriteModal" src="${image}">
+              <div>Type: ${type}</div>
+              <div>Start XP: ${base_experience}</div>
+              <div class="measurement">
+                <div class="weight">Weight: ${weight} kg</div>
+                <div class="height">Height: ${height} cm</div>
               </div>
+              <div class="type">Abilities: ${abilities}</div>
+              <br>
+              <p class="type">Info: ${flavorText}</p>
+              <div class="modalPagination">
+                <button class="modalPrevtBtn" onclick="prevPage()">Prev</button>
+                <button>ID: ${id}</button>
+                <button class="modalNextBtn" onclick="nextPage()">Next</button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              </button>
+              <button type="button" class="button" id="buyButton">Buy</button>
+              <button type="button" class="button" id="closeBtn" data-bs-dismiss="modal">
+                Close
+            </div>
+          </div>
+        </div>
+      </div>
             `;
 
       document

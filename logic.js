@@ -1,4 +1,7 @@
 export class logic {
+  constructor() {
+    this.currentPage = 1;
+  }
   flavorTexts = [];
 
   /**
@@ -17,7 +20,7 @@ export class logic {
 
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
-        this.flavorTexts.push(entry.flavor_text);
+        flavorTexts.push(entry.flavor_text);
       }
     });
 
@@ -32,7 +35,9 @@ export class logic {
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-      flavorText: this.flavorTexts[0],
+
+      flavorText: flavorTexts[0],
+
     };
     return pokemonObj;
   };
@@ -60,4 +65,18 @@ export class logic {
       .filter((promises) => promises.status === "fulfilled")
       .map((promises) => promises.value);
   };
+
+  savePageNr() {
+    localStorage.setItem("savedPageNr", JSON.stringify(this.currentPage));
+  }
+
+  loadPageNr() {
+    let savedPage = +localStorage.getItem("savedPageNr");
+    if (savedPage > 1) {
+      this.currentPage = savedPage;
+      return this.currentPage;
+    } else {
+      return 1;
+    }
+  }
 }
