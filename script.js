@@ -11,7 +11,7 @@ document.getElementById("searchButton").addEventListener("click", searchPage);
 
 function prevPage() {
   if (currentPage <= 1) {
-    currentPage = 94;
+    currentPage = 93;
     updatePage(shop.lastpageUrl);
     currentPageNumber();
   } else {
@@ -22,7 +22,7 @@ function prevPage() {
 }
 
 function nextPage() {
-  if (currentPage == 94) {
+  if (currentPage == 93) {
     currentPage = 1;
     updatePage(shop.firstPageUrl);
     currentPageNumber();
@@ -32,7 +32,7 @@ function nextPage() {
     currentPageNumber();
   }
 }
-
+//TODO Fixa så man inte kan skriva in mer än 93
 window.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
     let pageNr = document.getElementById("numberSearch").value;
@@ -130,7 +130,7 @@ function updatePage(url) {
                       <div class="type">Abilities: ${abilities}</div>
                       <br>
                       <p class="type">Info: ${flavorText}</p>
-                      <div>Page: FIXADETTAS</di
+                      <div>Page: ${currentPage}</div>
                     </div>                    
                     <div class="modal-footer">
                     </button>

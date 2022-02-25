@@ -19,20 +19,19 @@ export class logic {
   }
 
   getJupmpToPageUrl(askedPageNr) {
-    let offsetObj = askedPageNr * 12;
-    console.log(typeof offsetObj);
+    let offset = askedPageNr * 12;
 
     this.jumpToPageUrl = new URL("https://pokeapi.co");
     this.jumpToPageUrl.pathname = "/api/v2/pokemon";
     this.jumpToPageUrl.searchParams.set("limit", "12");
-    this.jumpToPageUrl.searchParams.set("offset" + { offsetObj });
+    this.jumpToPageUrl.searchParams.set("offset", offset);
 
-    console.log(this.jumpToPageUrl);
+    return this.jumpToPageUrl;
   }
 
   /**
    * @description Async function fetching pokemons
-   * @param {*} url of the page the pokemons should be fetchd from
+   * @param {*} url of the page the pokemons should be fetched from
    * @returns array of pokemonObjekt
    */
   async fetchPokemons(url) {
@@ -46,7 +45,12 @@ export class logic {
     });
 
     this.previousPageUrl = pageData.previous;
+    if (this.previousPageUrl != null)
+      this.preLoadCacheMemory(this.previousPageUrl);
+
     this.nextPageUrl = pageData.next;
+    if (this.nextPageUrl != null) this.preLoadCacheMemory(this.nextPageUrl);
+
     const pokemonsOnCurrentPage = pageData.results;
 
     for (let pokemonData of pokemonsOnCurrentPage) {
@@ -59,6 +63,29 @@ export class logic {
     return resluts
       .filter((promises) => promises.status === "fulfilled")
       .map((promises) => promises.value);
+  }
+
+  /**
+   * @description Async function fetching pokemons to browserCacheMemory. Encrease userExperience and pagespeed.
+   * @param {*} url of the page
+   */
+  async preLoadCacheMemory(url) {
+    let pageData = await fetch(url).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw (
+          "Something went wrong when preloading to cache, status: " +
+          response.status
+        );
+      }
+    });
+
+    const pokemonsOnNextPage = pageData.results;
+
+    for (let pokemonData of pokemonsOnNextPage) {
+      const cacheMemoryPokemons = this.fetchPokemon(pokemonData.url);
+    }
   }
 
   async fetchPokemon(url) {
