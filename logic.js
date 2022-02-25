@@ -1,4 +1,7 @@
 export class logic {
+  constructor() {
+    this.currentPage = 1;
+  }
   /**
    * @description Async function
    * @param {*} id
@@ -19,7 +22,7 @@ export class logic {
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
         flavorTexts.push(entry.flavor_text);
-      } 
+      }
     });
 
     const pokemonObj = {
@@ -35,7 +38,7 @@ export class logic {
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-      flavorText: flavorTexts[0]
+      flavorText: flavorTexts[0],
     };
 
     return pokemonObj;
@@ -61,4 +64,18 @@ export class logic {
     const pokemons = await Promise.all(promises);
     return pokemons;
   };
+
+  savePageNr() {
+    localStorage.setItem("savedPageNr", JSON.stringify(this.currentPage));
+  }
+
+  loadPageNr() {
+    let savedPage = +localStorage.getItem("savedPageNr");
+    if (savedPage > 1) {
+      this.currentPage = savedPage;
+      return this.currentPage;
+    } else {
+      return 1;
+    }
+  }
 }

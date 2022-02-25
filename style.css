@@ -20,6 +20,13 @@
   gap: 5px;
 }
 
+.modalPagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
 .paginationContainer {
   display: flex;
   flex-direction: column;
@@ -92,7 +99,6 @@
 }
 
 .button:after {
-  /* content: "»"; lägg denna på ett ID i pagination*/
   position: absolute;
   opacity: 0;
   top: 14px;
@@ -101,8 +107,6 @@
 }
 
 .button:hover {
-  /* padding-right: 24px; */
-  /* padding: 6px; */
   font-weight: bolder;
   box-shadow: 1px 5px 20px black;
   background-color: lightcoral;
@@ -147,14 +151,6 @@
   border: solid black 4px;
   box-shadow: 1px 1px 25px skyblue;
 }
-
-/*
-320px — 480px: Mobile devices
-481px — 768px: iPads, Tablets
-769px — 1024px: Small screens, laptops
-1025px — 1200px: Desktops, large screens
-1201px and more —  Extra large screens, TV
-*/
 
 @media (max-width: 480px) {
   .product-container {
