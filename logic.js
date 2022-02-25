@@ -8,6 +8,8 @@ export class logic {
   nextPageUrl = "";
 
   constructor() {
+    this.currentPage = 1;
+
     this.firstPageUrl = new URL("https://pokeapi.co");
     this.firstPageUrl.pathname = "/api/v2/pokemon";
     this.firstPageUrl.searchParams.set("limit", "12");
@@ -94,9 +96,11 @@ export class logic {
       response.json()
     );
 
+    let flavorTexts = [];
+
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
-        this.flavorTexts.push(entry.flavor_text);
+        flavorTexts.push(entry.flavor_text);
       }
     });
 
@@ -105,13 +109,15 @@ export class logic {
       name: pokemon.name,
       height: pokemon.height,
       weight: pokemon.weight,
+
       sprites: pokemon.sprites.other["official-artwork"].front_default,
+
       type: pokemon.types.map((mapArr) => mapArr.type.name).join(" / "),
       abilities: pokemon.abilities
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-      flavorText: this.flavorTexts[0],
+      flavorText: flavorTexts[0],
     };
 
     return pokemonObj;
