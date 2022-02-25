@@ -2,13 +2,12 @@ export class logic {
   constructor() {
     this.currentPage = 1;
   }
-  flavorTexts = [];
-
   /**
    * @description Async function
    * @param {*} id
    * @returns pokemon object
    */
+
   fetchPokemon = async (id) => {
     const url = new URL("https://pokeapi.co");
     url.pathname = `/api/v2/pokemon/${id}`;
@@ -17,6 +16,8 @@ export class logic {
     const species = await fetch(pokemon.species.url).then((response) =>
       response.json()
     );
+
+    let flavorTexts = [];
 
     species.flavor_text_entries.forEach((entry) => {
       if (entry.language.name == "en") {
@@ -29,24 +30,27 @@ export class logic {
       name: pokemon.name,
       height: pokemon.height,
       weight: pokemon.weight,
+
       sprites: pokemon.sprites.other["official-artwork"].front_default,
+
       type: pokemon.types.map((mapArr) => mapArr.type.name).join(" / "),
       abilities: pokemon.abilities
         .map((mapArr) => mapArr.ability.name)
         .join(", "),
       base_experience: pokemon.base_experience,
-
       flavorText: flavorTexts[0],
-
     };
+
     return pokemonObj;
   };
 
   /**
    * @description Async function
    * @param {*} pageNr
-   * @returns array of 12 pokemonObj on that page.
+   * @returns array of the 12 pokemonObj on that page.
    */
+  //TODO fixa en try catch för fetch pokemon?
+
   getPokemons = async (pageNr) => {
     const promises = [];
     pageNr = pageNr * 12;
@@ -54,16 +58,11 @@ export class logic {
       const pokemon = this.fetchPokemon(i);
       promises.push(pokemon);
 
-      const preloadPokemonsInBrowserChacheMemory = this.fetchPokemon(
-        i + 12
-      ).catch(console.log);
+      const preloadPokemonsInBrowserChacheMoory = this.fetchPokemon(i + 12); //ska inte vara await!
     }
 
-    const resluts = await Promise.allSettled(promises);
-    debugger;
-    return resluts
-      .filter((promises) => promises.status === "fulfilled")
-      .map((promises) => promises.value);
+    const pokemons = await Promise.all(promises);
+    return pokemons;
   };
 
   savePageNr() {
