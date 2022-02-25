@@ -12,41 +12,41 @@ document.getElementById("nextPage").addEventListener("click", nextPage);
 
 function prevPage() {
   if (currentPage <= 1) {
-    currentPage = 75;
-    updatePage(currentPage);
-    uppdatePageNummer();
+    currentPage = 93;
+    updatePage(shop.lastpageUrl);
+    updatePageNummer();
   } else {
     currentPage--;
-    updatePage(currentPage);
-    uppdatePageNummer();
+    updatePage(shop.previousPageUrl);
+    updatePageNummer();
   }
 }
 
 function nextPage() {
-  if (currentPage == 75) {
+  if (currentPage == 93) {
     currentPage = 1;
-    updatePage(currentPage);
-    uppdatePageNummer();
+    updatePage(shop.firstPageUrl);
+    updatePageNummer();
   } else {
     currentPage++;
-    updatePage(currentPage);
-    uppdatePageNummer();
+    updatePage(shop.nextPageUrl);
+    updatePageNummer();
   }
 }
-
-document.addEventListener("keyup", function (event) {
+//TODO Fixa så man inte kan skriva in mer än 93
+window.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
     let pageNr = document.getElementById("numberSearch").value;
-    updatePage(pageNr);
+    updatePage(shop.getJupmpToPageUrl(pageNr));
     currentPage = pageNr;
-    uppdatePageNummer();
+    updatePageNummer();
     document.getElementById("numberSearch").value = "";
   }
 });
 
-uppdatePageNummer();
+updatePageNummer();
 
-function uppdatePageNummer() {
+function updatePageNummer() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
   shop.currentPage = currentPage;
   shop.savePageNr();
@@ -61,10 +61,9 @@ function emptyShop() {
   document.getElementById("pokemonShop").innerHTML = "";
 }
 
-function updatePage(pageNr) {
+function updatePage(url) {
   let pokemonDiv = "";
-
-  shop.getPokemons(pageNr).then((pokemons) => {
+  shop.fetchPokemons(url).then((pokemons) => {
     emptyShop();
     for (let pokemon of pokemons) {
       let name = pokemon.name;
@@ -136,4 +135,4 @@ function updatePage(pageNr) {
   });
 }
 
-updatePage(currentPage);
+updatePage(shop.firstPageUrl);

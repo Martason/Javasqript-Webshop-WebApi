@@ -1,17 +1,96 @@
 export class logic {
+  flavorTexts = [];
+  pokemons = [];
+
+  firstPageUrl;
+  lastpageUrl;
+  previousPageUrl = "";
+  nextPageUrl = "";
+
   constructor() {
     this.currentPage = 1;
+
+    this.firstPageUrl = new URL("https://pokeapi.co");
+    this.firstPageUrl.pathname = "/api/v2/pokemon";
+    this.firstPageUrl.searchParams.set("limit", "12");
+
+    this.lastpageUrl = new URL("https://pokeapi.co");
+    this.lastpageUrl.pathname = "/api/v2/pokemon";
+    this.lastpageUrl.searchParams.set("limit", "12");
+    this.lastpageUrl.searchParams.set("offset", "1114");
   }
+
+  getJupmpToPageUrl(askedPageNr) {
+    let offset = askedPageNr * 12;
+
+    this.jumpToPageUrl = new URL("https://pokeapi.co");
+    this.jumpToPageUrl.pathname = "/api/v2/pokemon";
+    this.jumpToPageUrl.searchParams.set("limit", "12");
+    this.jumpToPageUrl.searchParams.set("offset", offset);
+
+    return this.jumpToPageUrl;
+  }
+
   /**
-   * @description Async function
-   * @param {*} id
-   * @returns pokemon object
+   * @description Async function fetching pokemons
+   * @param {*} url of the page the pokemons should be fetched from
+   * @returns array of pokemonObjekt
    */
+  async fetchPokemons(url) {
+    const promises = [];
+    let pageData = await fetch(url).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw "Something went wrong, status: " + response.status;
+      }
+    });
 
-  fetchPokemon = async (id) => {
-    const url = new URL("https://pokeapi.co");
-    url.pathname = `/api/v2/pokemon/${id}`;
+    this.previousPageUrl = pageData.previous;
+    if (this.previousPageUrl != null)
+      this.preLoadCacheMemory(this.previousPageUrl);
 
+    this.nextPageUrl = pageData.next;
+    if (this.nextPageUrl != null) this.preLoadCacheMemory(this.nextPageUrl);
+
+    const pokemonsOnCurrentPage = pageData.results;
+
+    for (let pokemonData of pokemonsOnCurrentPage) {
+      const pokemon = this.fetchPokemon(pokemonData.url);
+      promises.push(pokemon);
+    }
+
+    const resluts = await Promise.allSettled(promises);
+
+    return resluts
+      .filter((promises) => promises.status === "fulfilled")
+      .map((promises) => promises.value);
+  }
+
+  /**
+   * @description Async function fetching pokemons to browserCacheMemory. Encrease userExperience and pagespeed.
+   * @param {*} url of the page
+   */
+  async preLoadCacheMemory(url) {
+    let pageData = await fetch(url).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw (
+          "Something went wrong when preloading to cache, status: " +
+          response.status
+        );
+      }
+    });
+
+    const pokemonsOnNextPage = pageData.results;
+
+    for (let pokemonData of pokemonsOnNextPage) {
+      const cacheMemoryPokemons = this.fetchPokemon(pokemonData.url);
+    }
+  }
+
+  async fetchPokemon(url) {
     const pokemon = await fetch(url).then((response) => response.json());
     const species = await fetch(pokemon.species.url).then((response) =>
       response.json()
@@ -42,28 +121,7 @@ export class logic {
     };
 
     return pokemonObj;
-  };
-
-  /**
-   * @description Async function
-   * @param {*} pageNr
-   * @returns array of the 12 pokemonObj on that page.
-   */
-  //TODO fixa en try catch för fetch pokemon?
-
-  getPokemons = async (pageNr) => {
-    const promises = [];
-    pageNr = pageNr * 12;
-    for (let i = pageNr - 11; i <= pageNr; i++) {
-      const pokemon = this.fetchPokemon(i);
-      promises.push(pokemon);
-
-      const preloadPokemonsInBrowserChacheMoory = this.fetchPokemon(i + 12); //ska inte vara await!
-    }
-
-    const pokemons = await Promise.all(promises);
-    return pokemons;
-  };
+  }
 
   savePageNr() {
     localStorage.setItem("savedPageNr", JSON.stringify(this.currentPage));
