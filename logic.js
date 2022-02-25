@@ -1,15 +1,67 @@
 export class logic {
   flavorTexts = [];
+  pokemons = [];
+
+  firstPageUrl;
+  lastpageUrl;
+  previousPageUrl = "";
+  nextPageUrl = "";
+
+  constructor() {
+    this.firstPageUrl = new URL("https://pokeapi.co");
+    this.firstPageUrl.pathname = "/api/v2/pokemon";
+    this.firstPageUrl.searchParams.set("limit", "12");
+
+    this.lastpageUrl = new URL("https://pokeapi.co");
+    this.lastpageUrl.pathname = "/api/v2/pokemon";
+    this.lastpageUrl.searchParams.set("limit", "12");
+    this.lastpageUrl.searchParams.set("offset", "1114");
+  }
+
+  getJupmpToPageUrl(askedPageNr) {
+    let offsetObj = askedPageNr * 12;
+    console.log(typeof offsetObj);
+
+    this.jumpToPageUrl = new URL("https://pokeapi.co");
+    this.jumpToPageUrl.pathname = "/api/v2/pokemon";
+    this.jumpToPageUrl.searchParams.set("limit", "12");
+    this.jumpToPageUrl.searchParams.set("offset" + { offsetObj });
+
+    console.log(this.jumpToPageUrl);
+  }
 
   /**
-   * @description Async function
-   * @param {*} id
-   * @returns pokemon object
+   * @description Async function fetching pokemons
+   * @param {*} url of the page the pokemons should be fetchd from
+   * @returns array of pokemonObjekt
    */
-  fetchPokemon = async (id) => {
-    const url = new URL("https://pokeapi.co");
-    url.pathname = `/api/v2/pokemon/${id}`;
+  async fetchPokemons(url) {
+    const promises = [];
+    let pageData = await fetch(url).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw "Something went wrong, status: " + response.status;
+      }
+    });
 
+    this.previousPageUrl = pageData.previous;
+    this.nextPageUrl = pageData.next;
+    const pokemonsOnCurrentPage = pageData.results;
+
+    for (let pokemonData of pokemonsOnCurrentPage) {
+      const pokemon = this.fetchPokemon(pokemonData.url);
+      promises.push(pokemon);
+    }
+
+    const resluts = await Promise.allSettled(promises);
+
+    return resluts
+      .filter((promises) => promises.status === "fulfilled")
+      .map((promises) => promises.value);
+  }
+
+  async fetchPokemon(url) {
     const pokemon = await fetch(url).then((response) => response.json());
     const species = await fetch(pokemon.species.url).then((response) =>
       response.json()
@@ -34,33 +86,7 @@ export class logic {
       base_experience: pokemon.base_experience,
       flavorText: this.flavorTexts[0],
     };
+
     return pokemonObj;
-  };
-
-  /**
-   * @description Async function
-   * @param {*} pageNr
-   * @returns array of 12 pokemonObj on that page.
-   */
-  getPokemons = async (pageNr) => {
-    const promises = [];
-    pageNr = pageNr * 12;
-    for (let i = pageNr - 11; i <= pageNr; i++) {
-      i = i < 899 ? i : i + 9102;
-      const pokemon = this.fetchPokemon(i);
-      i = i > 899 ? i - 9102 : i;
-      promises.push(pokemon);
-
-      /*    const preloadPokemonsInBrowserChacheMemory = this.fetchPokemon(
-        i + 12
-      ).catch((_) =>
-        console.log("fetchError while atemting to preload nextpage")
-      ); */
-    }
-
-    const resluts = await Promise.allSettled(promises);
-    return resluts
-      .filter((promises) => promises.status === "fulfilled")
-      .map((promises) => promises.value);
-  };
+  }
 }

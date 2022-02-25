@@ -12,11 +12,11 @@ document.getElementById("searchButton").addEventListener("click", searchPage);
 function prevPage() {
   if (currentPage <= 1) {
     currentPage = 94;
-    updatePage(currentPage);
+    updatePage(shop.lastpageUrl);
     currentPageNumber();
   } else {
-    currentPage -= 1;
-    updatePage(currentPage);
+    currentPage--;
+    updatePage(shop.previousPageUrl);
     currentPageNumber();
   }
 }
@@ -24,11 +24,11 @@ function prevPage() {
 function nextPage() {
   if (currentPage == 94) {
     currentPage = 1;
-    updatePage(currentPage);
+    updatePage(shop.firstPageUrl);
     currentPageNumber();
   } else {
-    currentPage += 1;
-    updatePage(currentPage);
+    currentPage++;
+    updatePage(shop.nextPageUrl);
     currentPageNumber();
   }
 }
@@ -36,7 +36,7 @@ function nextPage() {
 window.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
     let pageNr = document.getElementById("numberSearch").value;
-    updatePage(pageNr);
+    updatePage(shop.getJupmpToPageUrl(pageNr));
     currentPage = pageNr;
     currentPageNumber();
   }
@@ -63,10 +63,9 @@ function emptyShop() {
   document.getElementById("pokemonShop").innerHTML = "";
 }
 
-function updatePage(pageNr) {
+function updatePage(url) {
   let pokemonDiv = "";
-
-  shop.getPokemons(pageNr).then((pokemons) => {
+  shop.fetchPokemons(url).then((pokemons) => {
     emptyShop();
     for (let pokemon of pokemons) {
       let name = pokemon.name;
@@ -131,12 +130,12 @@ function updatePage(pageNr) {
                       <div class="type">Abilities: ${abilities}</div>
                       <br>
                       <p class="type">Info: ${flavorText}</p>
-                      <div>Page: ${pageNr}</di
+                      <div>Page: FIXADETTAS</di
                     </div>                    
                     <div class="modal-footer">
                     </button>
                       <button type="button" class="button" id="buyButton">Buy</button>
-                      <button
+                      <buttonSSS
                         type="button"
                         class="button" id="closeBtn"
                         data-bs-dismiss="modal"
@@ -155,4 +154,4 @@ function updatePage(pageNr) {
   });
 }
 
-updatePage(currentPage);
+updatePage(shop.firstPageUrl);
