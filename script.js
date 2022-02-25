@@ -14,11 +14,11 @@ function prevPage() {
   if (currentPage <= 1) {
     currentPage = 93;
     updatePage(shop.lastpageUrl);
-    currentPageNumber();
+    updatePageNummer();
   } else {
     currentPage--;
     updatePage(shop.previousPageUrl);
-    currentPageNumber();
+    updatePageNummer();
   }
 }
 
@@ -26,11 +26,11 @@ function nextPage() {
   if (currentPage == 93) {
     currentPage = 1;
     updatePage(shop.firstPageUrl);
-    currentPageNumber();
+    updatePageNummer();
   } else {
     currentPage++;
     updatePage(shop.nextPageUrl);
-    currentPageNumber();
+    updatePageNummer();
   }
 }
 //TODO Fixa så man inte kan skriva in mer än 93
@@ -39,14 +39,14 @@ window.addEventListener("keyup", function (event) {
     let pageNr = document.getElementById("numberSearch").value;
     updatePage(shop.getJupmpToPageUrl(pageNr));
     currentPage = pageNr;
-    uppdatePageNummer();
+    updatePageNummer();
     document.getElementById("numberSearch").value = "";
   }
 });
 
-uppdatePageNummer();
+updatePageNummer();
 
-function uppdatePageNummer() {
+function updatePageNummer() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
   shop.currentPage = currentPage;
   shop.savePageNr();

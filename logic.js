@@ -122,4 +122,18 @@ export class logic {
 
     return pokemonObj;
   }
+
+  savePageNr() {
+    localStorage.setItem("savedPageNr", JSON.stringify(this.currentPage));
+  }
+
+  loadPageNr() {
+    let savedPage = +localStorage.getItem("savedPageNr");
+    if (savedPage > 1) {
+      this.currentPage = savedPage;
+      return this.currentPage;
+    } else {
+      return 1;
+    }
+  }
 }
