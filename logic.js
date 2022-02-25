@@ -8,11 +8,13 @@ export class logic {
   nextPageUrl = "";
 
   constructor() {
-    this.currentPage = 1;
+    this.currentPage = this.loadPageNr();
+    this.preLoadPage = this.currentPage * 12;
 
     this.firstPageUrl = new URL("https://pokeapi.co");
     this.firstPageUrl.pathname = "/api/v2/pokemon";
     this.firstPageUrl.searchParams.set("limit", "12");
+    this.firstPageUrl.searchParams.set("offset", this.preLoadPage);
 
     this.lastpageUrl = new URL("https://pokeapi.co");
     this.lastpageUrl.pathname = "/api/v2/pokemon";
@@ -129,7 +131,7 @@ export class logic {
 
   loadPageNr() {
     let savedPage = +localStorage.getItem("savedPageNr");
-    if (savedPage > 1) {
+    if (savedPage >= 1) {
       this.currentPage = savedPage;
       return this.currentPage;
     } else {

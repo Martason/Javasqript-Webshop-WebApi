@@ -1,4 +1,4 @@
-import { logic, logic as Shop } from "./logic.js";
+import { logic as Shop } from "./logic.js";
 
 let shop;
 shop = new Shop();
@@ -36,10 +36,11 @@ function nextPage() {
 //TODO Fixa så man inte kan skriva in mer än 93
 window.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
-    let pageNr = document.getElementById("numberSearch").value;
+    let pageNr = parseInt(document.getElementById("numberSearch").value);
     updatePage(shop.getJupmpToPageUrl(pageNr));
     currentPage = pageNr;
     updatePageNummer();
+    shop.savePageNr();
     document.getElementById("numberSearch").value = "";
   }
 });
@@ -50,7 +51,6 @@ function updatePageNummer() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
   shop.currentPage = currentPage;
   shop.savePageNr();
-  console.log(currentPage);
 }
 
 /**
