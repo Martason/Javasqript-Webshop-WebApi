@@ -8,13 +8,12 @@ export class logic {
   nextPageUrl = "";
 
   constructor() {
-    this.currentPage = this.loadPageNr();
-    this.preLoadPage = this.currentPage * 12;
+    let offset = (this.loadPageNr() - 1) * 12;
 
     this.firstPageUrl = new URL("https://pokeapi.co");
     this.firstPageUrl.pathname = "/api/v2/pokemon";
     this.firstPageUrl.searchParams.set("limit", "12");
-    this.firstPageUrl.searchParams.set("offset", this.preLoadPage);
+    this.firstPageUrl.searchParams.set("offset", offset);
 
     this.lastpageUrl = new URL("https://pokeapi.co");
     this.lastpageUrl.pathname = "/api/v2/pokemon";
@@ -23,7 +22,7 @@ export class logic {
   }
 
   getJupmpToPageUrl(askedPageNr) {
-    let offset = askedPageNr * 12;
+    let offset = (askedPageNr - 1) * 12;
 
     this.jumpToPageUrl = new URL("https://pokeapi.co");
     this.jumpToPageUrl.pathname = "/api/v2/pokemon";
@@ -125,8 +124,8 @@ export class logic {
     return pokemonObj;
   }
 
-  savePageNr() {
-    localStorage.setItem("savedPageNr", JSON.stringify(this.currentPage));
+  savePageNr(pageNr) {
+    localStorage.setItem("savedPageNr", JSON.stringify(pageNr));
   }
 
   loadPageNr() {

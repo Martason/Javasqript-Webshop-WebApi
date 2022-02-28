@@ -9,48 +9,48 @@ let currentPage = shop.loadPageNr();
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
+document.getElementById("numberSearch").addEventListener("keyup", inputNumber);
 
 function prevPage() {
   if (currentPage <= 1) {
-    currentPage = 93;
+    currentPage = 94;
     updatePage(shop.lastpageUrl);
-    updatePageNummer();
   } else {
     currentPage--;
     updatePage(shop.previousPageUrl);
-    updatePageNummer();
   }
+  updatePageNummer();
 }
 
 function nextPage() {
-  if (currentPage == 93) {
+  if (currentPage >= 94) {
     currentPage = 1;
     updatePage(shop.firstPageUrl);
-    updatePageNummer();
   } else {
     currentPage++;
     updatePage(shop.nextPageUrl);
-    updatePageNummer();
+  }
+  updatePageNummer();
+}
+
+function inputNumber(event) {
+  if (event.keyCode === 13) {
+    currentPage = parseInt(document.getElementById("numberSearch").value);
+    if (currentPage >= 1 && currentPage <= 94) {
+      updatePage(shop.getJupmpToPageUrl(currentPage));
+      updatePageNummer();
+      document.getElementById("numberSearch").value = "";
+    } else {
+      document.getElementById("numberSearch").value = "";
+    }
   }
 }
-//TODO Fixa så man inte kan skriva in mer än 93
-window.addEventListener("keyup", function (event) {
-  if (event.keyCode === 13) {
-    let pageNr = parseInt(document.getElementById("numberSearch").value);
-    updatePage(shop.getJupmpToPageUrl(pageNr));
-    currentPage = pageNr;
-    updatePageNummer();
-    shop.savePageNr();
-    document.getElementById("numberSearch").value = "";
-  }
-});
 
 updatePageNummer();
 
 function updatePageNummer() {
   document.getElementById("currentPage").innerHTML = "Page: " + currentPage;
-  shop.currentPage = currentPage;
-  shop.savePageNr();
+  shop.savePageNr(currentPage);
 }
 
 /**
