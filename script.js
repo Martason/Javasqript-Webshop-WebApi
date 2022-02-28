@@ -134,5 +134,4 @@ function updatePage(url) {
     }
   });
 }
-
 updatePage(shop.firstPageUrl);
