@@ -68,7 +68,7 @@ function updatePage(url) {
     for (let pokemon of pokemons) {
       let name = pokemon.name;
       let price = pokemon.height * pokemon.weight;
-      let image = pokemon.sprites;
+      let image = pokemon.sprites != null ? pokemon.sprites : "/img/ball.png";
       let type = pokemon.type;
       let weight = pokemon.weight / 10;
       let height = pokemon.height * 10;
