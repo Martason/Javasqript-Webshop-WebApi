@@ -3,8 +3,6 @@ import { logic as Shop } from "./logic.js";
 let shop;
 shop = new Shop();
 
-//pagination -
-
 let currentPage = shop.loadPageNr();
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
