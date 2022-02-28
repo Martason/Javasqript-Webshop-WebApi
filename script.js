@@ -3,7 +3,8 @@ import { logic as Shop } from "./logic.js";
 let shop;
 shop = new Shop();
 
-//pagination -
+/* let img1 = document.createElement("img");
+img1.src = "/img/ball.png"; */
 
 let currentPage = shop.loadPageNr();
 
@@ -68,7 +69,9 @@ function updatePage(url) {
     for (let pokemon of pokemons) {
       let name = pokemon.name;
       let price = pokemon.height * pokemon.weight;
-      let image = pokemon.sprites;
+      debugger;
+      let image = pokemon.sprites != null ? pokemon.sprites : "/img/ball.png";
+      debugger;
       let type = pokemon.type;
       let weight = pokemon.weight / 10;
       let height = pokemon.height * 10;
