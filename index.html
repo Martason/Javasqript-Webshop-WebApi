@@ -17,22 +17,107 @@
   <main class="container">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
         <div class="container">
-          <a class="navbar-brand" href="#">Pokemons</a>
+
+          <a class="navbar-brand" href="https://pokemon.fandom.com/wiki/Pok%C3%A9mon_Wiki" target="_blank">Pokemons</a>
+
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">About</a>
+                <div class="dropdown navbar-brand">
+                  <span>Misty</span>
+                  <div class="dropdown-content">
+                    <div class="dropdown navbar-brand">
+                      <a class="navbar-brand" href="https://www.linkedin.com/in/anna-m%C3%A4rta-hjalmarson-088405168/"
+                        target="_blank">Linked</a>
+                      <a class="navbar-brand" href="https://github.com/Martason" target="_blank">Git</a>
+                    </div>
+                  </div>
+                </div>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
+                <div class="dropdown navbar-brand">
+                  <span>Ash</span>
+                  <div class="dropdown-content">
+                    <div class="dropdown navbar-brand">
+                      <a class="navbar-brand" href="https://www.linkedin.com/in/joakim-engstr%C3%B6m-19997261/"
+                        target="_blank">Linked</a>
+                      <a class="navbar-brand" href="https://github.com/JoakimIengstrom" target="_blank">Git</a>
+                    </div>
+                  </div>
+              </li>
+
+              <li class="nav-item">
+                <div class="dropdown navbar-brand">
+                  <span>Contact Us</span>
+                  <div class="dropdown-content" id="contact-dropdown">
+                    <div class="content">
+                      <div class="container-contact">
+                        <h2>Contact Us</h2>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="contact-info">
+                              <img class="contact-logo" src="https://image.ibb.co/kUASdV/contact-image.png"
+                                alt="image" />
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="contact-form">
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="fname">First Name:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="fname" placeholder="Enter First Name"
+                                    name="fname" />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="lname">Last Name:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="lname" placeholder="Enter Last Name"
+                                    name="lname" />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="email">Email:</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="email" placeholder="Enter email"
+                                    name="email" />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="comment">Comment:</label>
+                                <div class="col-sm-10">
+                                  <textarea class="form-control" rows="5" id="comment"></textarea>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                  <button type="submit" class="btn btn-default" onclick="submit_btn()">
+                                    Submit
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
             </ul>
+
             <form class="d-flex">
               <input id="inputSearch" class="form-control me-2" type="search" placeholder="Search pokemon"
                 aria-label="Search" />
@@ -40,7 +125,9 @@
                 Go!
               </button>
             </form>
+
           </div>
+
         </div>
       </nav>
     </header>
