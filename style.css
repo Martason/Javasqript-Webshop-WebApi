@@ -7,13 +7,15 @@
   margin: auto;
 }
 
+/* Pagination */
+
 .buttonPagination {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
 
-.measurement {
+.pokemonMeasurement {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -44,9 +46,11 @@
   width: 250%;
 }
 
-#numberSearch {
+#choosePage {
   text-align: center;
 }
+
+/* Modal */
 
 .name {
   text-transform: capitalize;
@@ -74,6 +78,14 @@
   background-image: url("/img/back-ball.png");
   background-repeat: no-repeat;
 }
+
+.modal-content {
+  border-radius: 10px;
+  border: solid black 4px;
+  box-shadow: 1px 1px 25px skyblue;
+}
+
+/* Button */
 
 .button {
   border-radius: 4px;
@@ -117,6 +129,8 @@
   right: 10px;
 }
 
+/* Fotter */
+
 .footerStyle {
   display: flex;
   flex-direction: row;
@@ -145,11 +159,7 @@
   font-weight: bolder;
 }
 
-.modal-content {
-  border-radius: 10px;
-  border: solid black 4px;
-  box-shadow: 1px 1px 25px skyblue;
-}
+/* Nav */
 
 .dropdown {
   position: relative;
@@ -178,7 +188,7 @@ span {
   display: block;
 }
 
-/* CONTACT US */
+/* Contact Us */
 
 .content {
   justify-self: center;
@@ -262,7 +272,7 @@ label {
     width: 90px;
   }
 
-  #numberSearch {
+  #choosePage {
     width: 60%;
     margin-top: 15px;
   }
@@ -286,7 +296,7 @@ label {
     width: 120px;
   }
 
-  #numberSearch {
+  #choosePage {
     width: 40%;
   }
 
@@ -322,7 +332,7 @@ label {
     width: 110px;
   }
 
-  #numberSearch {
+  #choosePage {
     width: 30%;
   }
 
@@ -342,7 +352,7 @@ label {
     width: 100px;
   }
 
-  #numberSearch {
+  #choosePage {
     width: 25%;
   }
 }
@@ -358,7 +368,7 @@ label {
     width: 100px;
   }
 
-  #numberSearch {
+  #choosePage {
     width: 15%;
   }
 }

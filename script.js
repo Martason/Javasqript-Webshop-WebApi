@@ -7,15 +7,15 @@ let currentPage = shop.loadPageNr();
 
 document.getElementById("prevPage").addEventListener("click", prevPage);
 document.getElementById("nextPage").addEventListener("click", nextPage);
-document.getElementById("numberSearch").addEventListener("keyup", inputNumber);
+document.getElementById("choosePage").addEventListener("keyup", jumpToPage);
 
 function prevPage() {
   if (currentPage <= 1) {
     currentPage = 94;
-    updatePage(shop.lastpageUrl);
+    updatePokemonsOnPage(shop.lastpageUrl);
   } else {
     currentPage--;
-    updatePage(shop.previousPageUrl);
+    updatePokemonsOnPage(shop.previousPageUrl);
   }
   updatePageNummer();
 }
@@ -23,23 +23,23 @@ function prevPage() {
 function nextPage() {
   if (currentPage >= 94) {
     currentPage = 1;
-    updatePage(shop.pageOneUrl);
+    updatePokemonsOnPage(shop.pageOneUrl);
   } else {
     currentPage++;
-    updatePage(shop.nextPageUrl);
+    updatePokemonsOnPage(shop.nextPageUrl);
   }
   updatePageNummer();
 }
 
-function inputNumber(event) {
+function jumpToPage(event) {
   if (event.keyCode === 13) {
-    currentPage = parseInt(document.getElementById("numberSearch").value);
+    currentPage = parseInt(document.getElementById("choosePage").value);
     if (currentPage >= 1 && currentPage <= 94) {
-      updatePage(shop.getJupmpToPageUrl(currentPage));
+      updatePokemonsOnPage(shop.getJupmpToPageUrl(currentPage));
       updatePageNummer();
-      document.getElementById("numberSearch").value = "";
+      document.getElementById("choosePage").value = "";
     } else {
-      document.getElementById("numberSearch").value = "";
+      document.getElementById("choosePage").value = "";
     }
   }
 }
@@ -51,15 +51,11 @@ function updatePageNummer() {
   shop.savePageNr(currentPage);
 }
 
-/**
- *
- * @description emptys all product-container divs
- */
 function emptyShop() {
   document.getElementById("pokemonShop").innerHTML = "";
 }
 
-function updatePage(url) {
+function updatePokemonsOnPage(url) {
   let pokemonDiv = "";
   shop.fetchPokemons(url).then((pokemons) => {
     emptyShop();
@@ -102,7 +98,7 @@ function updatePage(url) {
               <img class="spriteModal" src="${image}">
               <div>Type: ${type}</div>
               <div>Start XP: ${base_experience}</div>
-              <div class="measurement">
+              <div class="pokemonMeasurement">
                 <div class="weight">Weight: ${weight} kg</div>
                 <div class="height">Height: ${height} cm</div>
               </div>
@@ -132,4 +128,4 @@ function updatePage(url) {
     }
   });
 }
-updatePage(shop.firstPageUrl);
+updatePokemonsOnPage(shop.firstPageUrl);
