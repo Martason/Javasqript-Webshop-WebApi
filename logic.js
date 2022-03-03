@@ -27,6 +27,12 @@ export class logic {
     this.pageOneUrl.searchParams.set("offset", "0");
   }
 
+  /**
+   * @description Async function fetching pokemons
+   * @param {*} url of the page the pokemons should be fetched from
+   * @returns returnerar
+   */
+
   getJupmpToPageUrl(askedPageNr) {
     let offset = (askedPageNr - 1) * 12;
 
@@ -43,6 +49,7 @@ export class logic {
    * @param {*} url of the page the pokemons should be fetched from
    * @returns array of pokemonObjekt
    */
+
   async fetchPokemons(url) {
     const promises = [];
     let pageData = await fetch(url).then((response) => {
@@ -78,6 +85,7 @@ export class logic {
    * @description Async function fetching pokemons to browserCacheMemory. Encrease userExperience and pagespeed.
    * @param {*} url of the page
    */
+
   async preLoadCacheMemory(url) {
     let pageData = await fetch(url).then((response) => {
       if (response.ok) {
