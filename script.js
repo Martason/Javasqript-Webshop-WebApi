@@ -23,7 +23,7 @@ function prevPage() {
 function nextPage() {
   if (currentPage >= 94) {
     currentPage = 1;
-    updatePage(shop.firstPageUrl);
+    updatePage(shop.pageOneUrl);
   } else {
     currentPage++;
     updatePage(shop.nextPageUrl);

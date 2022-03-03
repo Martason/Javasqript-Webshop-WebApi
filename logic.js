@@ -4,6 +4,7 @@ export class logic {
 
   firstPageUrl;
   lastpageUrl;
+  pageOneUrl = "";
   previousPageUrl = "";
   nextPageUrl = "";
 
@@ -19,6 +20,11 @@ export class logic {
     this.lastpageUrl.pathname = "/api/v2/pokemon";
     this.lastpageUrl.searchParams.set("limit", "12");
     this.lastpageUrl.searchParams.set("offset", "1114");
+
+    this.pageOneUrl = new URL("https://pokeapi.co");
+    this.pageOneUrl.pathname = "/api/v2/pokemon";
+    this.pageOneUrl.searchParams.set("limit", "12");
+    this.pageOneUrl.searchParams.set("offset", "0");
   }
 
   getJupmpToPageUrl(askedPageNr) {
