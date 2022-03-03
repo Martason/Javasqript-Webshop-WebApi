@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  width: 90%;
+  width: 95%;
   padding: 5px;
   margin: auto;
 }
@@ -64,7 +64,6 @@
 .spriteModal {
   background-image: url("/img/background.png");
   background-repeat: no-repeat;
-  border-radius: 60%;
   border: solid black 1px;
   width: 95%;
 }
@@ -72,9 +71,8 @@
 .sprite:hover {
   margin: auto;
   width: 100%;
-  border-radius: 60%;
-  /*  box-shadow: 1px 1px 10px purple; */
   background-image: url("/img/back-ball.png");
+  background-repeat: no-repeat;
 }
 
 .button {
@@ -152,6 +150,102 @@
   border: solid black 4px;
   box-shadow: 1px 1px 25px skyblue;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+}
+
+span {
+  margin-left: 20px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 12px 12px;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* CONTACT US */
+
+.content {
+  justify-self: center;
+  width: 90%;
+  grid-row: 2 / 3;
+  grid-column: 1 / 5;
+  margin: auto;
+}
+.contact {
+  padding: 4%;
+  height: 100%;
+}
+.col-md-3 {
+  background: #5ca1e1;
+}
+.contact-info {
+  margin-top: 10%;
+}
+.contact-info img {
+  margin-bottom: 15%;
+}
+.contact-info h2 {
+  margin-bottom: 10%;
+}
+.col-md-9 {
+  background: rgb(255, 255, 255);
+  padding: 3%;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.contact-form label {
+  font-weight: 600;
+}
+.contact-form .btn {
+  color: #fff;
+  font-weight: 600;
+  width: 50%;
+  transition: 0.5s;
+  border: solid 0.1px black;
+  margin-top: 5px;
+  background-color: #5ca1e1;
+}
+.contact-form .btn:focus {
+  box-shadow: none;
+}
+
+.btn:hover {
+  background: lightcoral;
+  color: black;
+  border: solid black 2px;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
+}
+
+.contact-logo {
+  text-align: center;
+}
+
+label {
+  color: black;
+  display: grid;
+}
+
+.form-control {
+  color: #25274d;
+}
+
+/* media */
 
 @media (max-width: 480px) {
   .product-container {
@@ -267,117 +361,4 @@
   #numberSearch {
     width: 15%;
   }
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  margin: auto;
-}
-
-span {
-  margin-left: 20px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-
-  background-color: #f9f9f9;
-  min-width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  padding: 12px 12px;
-  z-index: 1;
-  border-radius: 5px;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* CONTACT US */
-
-/* #contact-dropdown {
-  width: 150%;
-} */
-
-.content {
-  justify-self: center;
-  width: 90%;
-  grid-row: 2 / 3;
-  grid-column: 1 / 5;
-  margin: auto;
-}
-.contact {
-  padding: 4%;
-  height: 100%;
-}
-.col-md-3 {
-  background: #5ca1e1;
-}
-.contact-info {
-  margin-top: 10%;
-}
-.contact-info img {
-  margin-bottom: 15%;
-}
-.contact-info h2 {
-  margin-bottom: 10%;
-}
-.col-md-9 {
-  background: rgb(255, 255, 255);
-  padding: 3%;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-}
-.contact-form label {
-  font-weight: 600;
-}
-.contact-form .btn {
-  background: #fff;
-  border: 1px solid black;
-  color: black;
-  font-weight: 600;
-  width: 50%;
-  transition: 0.5s;
-}
-.contact-form .btn:focus {
-  box-shadow: none;
-}
-
-.btn:hover {
-  background: #ff9b00;
-  color: #fff;
-  border: solid black 2px;
-}
-
-.btn {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-h4 {
-  color: #25274d;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-h2 {
-  color: #25274d;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-.contact-logo {
-  text-align: center;
-}
-
-label {
-  color: black;
-  display: grid;
-}
-
-.form-control {
-  color: #25274d;
 }
