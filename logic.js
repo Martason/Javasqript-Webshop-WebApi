@@ -4,6 +4,7 @@
 export class logic {
   flavorTexts = [];
   pokemons = [];
+  pokemonLibrary = [];
 
   firstPageUrl;
   lastpageUrl;
@@ -31,6 +32,8 @@ export class logic {
     this.pageOneUrl.pathname = "/api/v2/pokemon";
     this.pageOneUrl.searchParams.set("limit", "12");
     this.pageOneUrl.searchParams.set("offset", "0");
+
+    this.fetchPagePokemonLibrary();
   }
 
   /**
@@ -88,29 +91,6 @@ export class logic {
   }
 
   /**
-   * @description Async function fetching pokemons to browserCacheMemory. Encrease userExperience and pagespeed.
-   * @param {*} url of the page
-   */
-  async preLoadCacheMemory(url) {
-    let pageData = await fetch(url).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw (
-          "Something went wrong when preloading to cache, status: " +
-          response.status
-        );
-      }
-    });
-
-    const pokemonsOnNextPage = pageData.results;
-
-    for (let pokemonData of pokemonsOnNextPage) {
-      const cacheMemoryPokemons = this.fetchPokemon(pokemonData.url);
-    }
-  }
-
-  /**
    * @description Async function fetching a pokemon objekt
    * @param {*} url of the page the pokemon info can be fetched from
    * @returns a single pokemon objekt
@@ -146,6 +126,69 @@ export class logic {
     };
 
     return pokemonObj;
+  }
+
+  /**
+   * @description Async function fetching pokemons to browserCacheMemory. Encrease userExperience and pagespeed.
+   * @param {*} url of the page
+   */
+  async preLoadCacheMemory(url) {
+    let pageData = await fetch(url).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw (
+          "Something went wrong when preloading to cache, status: " +
+          response.status
+        );
+      }
+    });
+
+    const pokemonsOnNextPage = pageData.results;
+
+    for (let pokemonData of pokemonsOnNextPage) {
+      const cacheMemoryPokemons = this.fetchPokemon(pokemonData.url);
+    }
+  }
+
+  /**
+   * @description sets pokemonPageLibrary via fetch from pokeApi. Enabels page searchs funktions.
+   */
+  async fetchPagePokemonLibrary() {
+    let getCountUrl;
+    let count;
+
+    let getPokemonLibraryUrl;
+
+    getCountUrl = new URL("https://pokeapi.co");
+    getCountUrl.pathname = "/api/v2/pokemon";
+
+    const countData = await fetch(getCountUrl).then((response) =>
+      response.json()
+    );
+    count = countData.count;
+
+    getPokemonLibraryUrl = new URL("https://pokeapi.co");
+    getPokemonLibraryUrl.pathname = "/api/v2/pokemon";
+    getPokemonLibraryUrl.searchParams.set("limit", count);
+
+    const libraryData = await fetch(getPokemonLibraryUrl).then((response) =>
+      response.json()
+    );
+
+    const pokemons = libraryData.results;
+
+    for (let i = 0; i < pokemons.length; i++) {
+      const pagePokemonData = {
+        name: pokemons[i].name,
+        pageId: i + 1, //Eftersom att index börjar på 0
+        onPage: Math.ceil((i + 1) / 12), // Hoppad detta blir bra
+      };
+
+      this.pokemonLibrary.push(pagePokemonData);
+    }
+
+    console.log(this.pokemonLibrary);
   }
 
   /**

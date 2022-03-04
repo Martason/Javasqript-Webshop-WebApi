@@ -255,6 +255,54 @@ label {
   color: #25274d;
 }
 
+/*Pokemon seachbar autocomplete popup*/
+
+.pokemonSearch {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+input[type="text"] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type="submit"] {
+  background-color: transparent;
+  color: #fff;
+}
+.pokemonSearch-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.pokemonSearch-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.pokemonSearch-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.pokemonSearch-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
 /* media */
 
 @media (max-width: 480px) {

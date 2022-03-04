@@ -128,14 +128,14 @@
 
             <a class="navbar-brand" href="#" target="_blank">Pokemon Wiki</a>
 
-            <form class="d-flex">
-
-              <input id="search-pokemon" class="form-control me-2" type="search" placeholder="Search pokemon"
+            <form autocomplete="off" class="d-flex">
+              <div class="pokemonSearch">
+              <input id="search-pokemon" class="form-control me-2" type="text" placeholder="Search pokemon"
                 aria-label="Search" />
-
-              <button id="searchButton" class="btn btn-outline-success" type="submit">
-                🔍
-              </button>
+              </div>
+              <input type="submit" value="🔍">
+              <!-- <button id="searchButton" class="btn btn-outline-success" type="submit"> 🔍
+              </button> -->
             </form>
 
           </div>
