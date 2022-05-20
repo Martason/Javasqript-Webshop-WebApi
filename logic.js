@@ -211,4 +211,8 @@ export class logic {
       return 1;
     }
   }
+
+  GetPageByName(pokemonName) {
+    //TODO skapa en funktion som tar in ett pokemon namn och returnerar vilken sida den pokemonen finns på
+  }
 }
